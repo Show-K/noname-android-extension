@@ -200,7 +200,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						return;
 					} else _status.isGettingExtensions = true;
 					/** 扩展下载地址 */
-					const my_ext_site = 'https://raw.fastgit.org/nonameShijian/noname-android-extension/main/';
+					const my_ext_site = 'https://raw.fastgit.org/Show-K/noname-android-extension/main/';
 					function getExtensions() {
 						fetch(my_ext_site + 'update.js')
 							.then(res => {
@@ -312,7 +312,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							const ext_name = ui.create.div('.caption', extName, ext);
 							const ext_author = ui.create.div('.text.author', '作者: ' + (author ? author : '未知'), ext);
 							const ext_version = ui.create.div('.text', '版本: ' + (version ? version : '未知版本'), ext);
-							// 提示无名杀版本不兼容
+							// 提示大乱桌斗版本不兼容
 							if (typeof nonameVersion == 'string' && lib.version != nonameVersion) {
 								ui.create.node('span', ext_version, {
 									innerHTML: '<span style="color: turquoise;">(版本不兼容)</span>',
@@ -350,10 +350,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							checkbox.type = 'checkbox';
 							checkbox.addEventListener('change', function () {
 								if (this.checked) {
-									// 判断是否符合无名杀版本
+									// 判断是否符合大乱桌斗版本
 									if (typeof nonameVersion == 'string') {
 										if (lib.version != nonameVersion) {
-											alert(`为避免扩展报错，本扩展的当前版本(${version ? version : '未知版本'})只适用于无名杀版本${nonameVersion}`);
+											alert(`为避免扩展报错，本扩展的当前版本(${version ? version : '未知版本'})只适用于大乱桌斗版本${nonameVersion}`);
 											this.checked = false;
 											return false;
 										}
@@ -521,7 +521,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			}
 		},
 		package: {
-			intro: "本扩展的功能是导入\"从其他应用使用无名杀打开的扩展包\"，请勿删除",
+			intro: "本扩展的功能是导入\"从其他应用使用大乱桌斗打开的扩展包\"，请勿删除",
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
