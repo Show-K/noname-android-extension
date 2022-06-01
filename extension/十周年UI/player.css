@@ -4,7 +4,7 @@
 	width: 120px;
 	border-radius: 8px;
 	box-shadow: 0px -1px 3px black, 0px 3px 8px black;
-	background-image: linear-gradient(rgb(53,38,32), rgb(53,38,32));
+	background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
 	transition-property: transform, opacity, left, top, right, bottom;
 }
 
@@ -185,7 +185,7 @@
 
 .player>.camp-wrap>.camp-back {
 	background: linear-gradient(to bottom, rgb(155,129,108), rgb(73,71,58));
-	clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0% 90%);
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0% 90%);
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0% 90%);
 }
 
@@ -193,20 +193,28 @@
 	background: linear-gradient(to bottom, rgb(92,35,22), rgb(50,27,26));
 }
 
-.player>.camp-wrap[data-camp='wei']>.camp-back {
+.player>.camp-wrap[data-camp='sst_light']>.camp-back {
+	background: linear-gradient(to bottom, rgb(154, 148, 122), rgb(74, 72, 57));
+}
+
+.player>.camp-wrap[data-camp='sst_dark']>.camp-back {
 	background: linear-gradient(to bottom, rgb(45, 103, 153), rgb(19, 45, 78));
 }
 
-.player>.camp-wrap[data-camp='shu']>.camp-back {
-	background: linear-gradient(to bottom, rgb(153, 28, 34), rgb(57, 12, 17));
-}
-
-.player>.camp-wrap[data-camp='wu']>.camp-back {
+.player>.camp-wrap[data-camp='sst_spirit']>.camp-back {
 	background: linear-gradient(to bottom, rgb(29, 114, 29), rgb(34, 42, 27));
 }
 
-.player>.camp-wrap[data-camp='qun']>.camp-back {
-	background: linear-gradient(to bottom, rgb(154, 148, 122), rgb(74, 72, 57));
+.player>.camp-wrap[data-camp='sst_reality']>.camp-back {
+	background: linear-gradient(to bottom, rgb(153, 28, 34), rgb(57, 12, 17));
+}
+
+.player>.camp-wrap[data-camp='sst_reality_shen']>.camp-back {
+	background: linear-gradient(to bottom, rgb(97,87,15), rgb(65,50,9), rgb(67,52,9));
+}
+
+.player>.camp-wrap[data-camp='sst_smash']>.camp-back {
+	background: linear-gradient(to bottom, rgb(97,87,15), rgb(65,50,9), rgb(67,52,9));
 }
 
 .player>.camp-wrap[data-camp='shen']>.camp-back {
@@ -221,38 +229,6 @@
 	background: linear-gradient(to bottom, rgb(112, 52, 126), rgb(52, 18, 55));
 }
 
-.player>.camp-wrap[data-camp='key']>.camp-back {
-	background: linear-gradient(to bottom, rgb(147,132,183), rgb(130,120,160), rgb(120,115,154));
-}
-
-.player>.camp-wrap[data-camp='western']>.camp-back {
-	background: linear-gradient(to bottom, rgb(93,44,105), rgb(54,18,58));
-}
-
-.player>.camp-wrap[data-camp='jin']>.camp-back {
-	background: linear-gradient(to bottom, rgb(112, 52, 126), rgb(52, 18, 55));
-}
-
-.player>.camp-wrap[data-camp='han']>.camp-back {
-	background: linear-gradient(to bottom, rgb(112,52,126), rgb(52,18,55));
-}
-
-.player>.camp-wrap[data-camp='daqin']>.camp-back {
-	background: linear-gradient(to bottom, rgb(100,100,100), rgb(0,0,0));
-}
-
-.player>.camp-wrap[data-camp='ming']>.camp-back {
-	background: linear-gradient(to bottom, rgb(153,28,34), rgb(57,12,17));
-}
-
-.player>.camp-wrap[data-camp='yao']>.camp-back {
-	background: linear-gradient(to bottom, rgb(144,0,0), rgb(17,73,132));
-}
-
-.player>.camp-wrap[data-camp='xin']>.camp-back {
-	background: linear-gradient(to bottom, rgb(112, 52, 126), rgb(52, 18, 55));
-}
-
 .player>.camp-wrap>.camp-border {
 	display: block;
     left: 0px;
@@ -264,23 +240,6 @@
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
-
-#arena.decadeUI[data-border-level='one'] .player>.camp-wrap>.camp-border {
-	background-image: url('image/decoration/border_camp1.png');
-}
-
-#arena.decadeUI[data-border-level='two'] .player>.camp-wrap>.camp-border {
-	background-image: url('image/decoration/border_camp2.png');
-}
-
-#arena.decadeUI[data-border-level='three'] .player>.camp-wrap>.camp-border {
-	background-image: url('image/decoration/border_camp3.png');
-}
-
-#arena.decadeUI[data-border-level='four'] .player>.camp-wrap>.camp-border {
-	background-image: url('image/decoration/border_camp4.png');
-}
-
 .player>.camp-wrap>.avatar-name,
 .player>.camp-wrap>.avatar-name-default,
 .player>.camp-wrap>.camp-back {
@@ -291,11 +250,13 @@
     font-size: 16px;
 	text-align: center;
 	text-shadow: none; /*#000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0;*/
-    left: 26%;
-    top: 24%;
-    right: 26%;
-    bottom: 1%;
+    left: 26.125%;
+    top: 21.875%;
+    right: 25.75%;
+    bottom: 0%;
     position: absolute;
+	writing-mode: vertical-rl;
+	-webkit-writing-mode: vertical-rl;
 }
 
 .player.unseen>.camp-wrap>.avatar-name,
@@ -305,7 +266,7 @@
 }
 
 .player>.camp-wrap>.camp-name {
-	font-family: xinwei, xingkai;
+	font-family: fzhtk;
 	font-display: swap;
 	font-size: 26px;
     width: 100%;
@@ -321,24 +282,36 @@
     transition: none;
 }
 
-.player>.camp-wrap[data-camp='wei']>.camp-name {
+.player>.camp-wrap[data-camp='sst_light']>.camp-name {
+	text-shadow: 0 0 5px rgb(170,170,170), 0 0 10px rgb(118,118,118), 0 0 15px rgb(118,118,118);
+}
+
+.player>.camp-wrap[data-camp='sst_dark']>.camp-name {
 	text-shadow: 0 0 5px rgb(50, 50, 255), 0 0 10px rgb(120, 120, 255), 0 0 15px rgb(100, 100, 255);
 }
 
-.player>.camp-wrap[data-camp='shu']>.camp-name {
-	text-shadow: 0 0 5px rgb(255,100,100), 0 0 10px rgb(255,50,50), 0 0 15px rgb(255,50,50);
-}
-
-.player>.camp-wrap[data-camp='wu']>.camp-name {
+.player>.camp-wrap[data-camp='sst_spirit']>.camp-name {
 	text-shadow: 0 0 5px rgb(100,233,100), 0 0 10px rgb(50,255,50), 0 0 15px rgb(50,255,50);
 }
 
-.player>.camp-wrap[data-camp='qun']>.camp-name {
-	text-shadow: 0 0 5px rgb(170,170,170), 0 0 10px rgb(118,118,118), 0 0 15px rgb(118,118,118);
+.player>.camp-wrap[data-camp='sst_reality']>.camp-name {
+	text-shadow: 0 0 5px rgb(255,100,100), 0 0 10px rgb(255,50,50), 0 0 15px rgb(255,50,50);
+}
+
+.player>.camp-wrap[data-camp='sst_reality_shen']>.camp-name {
+	text-shadow: 0 0 5px rgb(255, 200, 0), 0 0 10px rgb(255, 200, 0), 0 0 15px rgb(255, 200, 0);
+}
+
+.player>.camp-wrap[data-camp='sst_smash']>.camp-name {
+	text-shadow: 0 0 5px rgb(255, 200, 0), 0 0 10px rgb(255, 200, 0), 0 0 15px rgb(255, 200, 0);
 }
 
 .player>.camp-wrap[data-camp='shen']>.camp-name {
 	text-shadow: 0 0 5px rgb(255, 200, 0), 0 0 10px rgb(255, 200, 0), 0 0 15px rgb(255, 200, 0);
+}
+
+.player>.camp-wrap[data-camp='ye']>.camp-name {
+	text-shadow: 0 0 5px rgb(112, 52, 126), 0 0 10px rgb(52, 18, 55), 0 0 15px rgb(52, 18, 55);
 }
 
 .player>.camp-wrap>.camp-name {
@@ -375,7 +348,7 @@
 .player>.nameol {
 	top: 5px;
     font-size: 16px;
-    font-family: 'shousha';
+    font-family: fzhtk;
     text-shadow: 0 0 2px black;
     background: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.4) 60%, transparent 100%);
     z-index: 89;
@@ -420,23 +393,6 @@
 .player.connect>div:not(.avatar):not(.name):not(.nameol):not(.hp):not(.room):not(.gaming):not(.identity).hp-wrap {
 	display: block !important;
 }
-
-#arena.decadeUI[data-border-level='one'] .player>.hp-wrap {
-	border-image-source: url('image/decoration/border_hp1.png');
-}
-
-#arena.decadeUI[data-border-level='two'] .player>.hp-wrap {
-	border-image-source: url('image/decoration/border_hp2.png');
-}
-
-#arena.decadeUI[data-border-level='three'] .player>.hp-wrap {
-	border-image-source: url('image/decoration/border_hp3.png');
-}
-
-#arena.decadeUI[data-border-level='four'] .player>.hp-wrap {
-	border-image-source: url('image/decoration/border_hp4.png');
-}
-
 .player>.hp-wrap>.hp,
 #arena.slim_player .player .hp,
 #window>.player:not(.minskin) .hp {
@@ -458,7 +414,7 @@
 	opacity: 1 !important;
 }
 
-.player>.hp-wrap>.hp>div {
+.player>.hp-wrap>.hp>div:not(.shield) {
     position: static;
 	margin-top: 3px;
 	width: 12px;
@@ -532,13 +488,13 @@
 
 #arena[data-outcrop-skin='on']>.player>.primary-avatar {
 	height: 192px;
-	clip-path: url(#solo-clip);
+    clip-path: url(#solo-clip);
     -webkit-clip-path: url(#solo-clip);
 }
 
 #arena[data-outcrop-skin='on']>.player>.deputy-avatar {
     height: 192px;
-	clip-path: url(#duor-clip);
+    clip-path: url(#duor-clip);
     -webkit-clip-path: url(#duor-clip);
 }
 
@@ -657,7 +613,7 @@
 	width: 18px;
 	height: auto;
 	border-radius: 0;
-	font-family: xinwei,xingkai;
+	font-family: fzhtk;
 	box-shadow:  none;
 	background: none;
 	overflow: visible;
@@ -683,7 +639,7 @@
     line-height: 16px;
     text-align: center;
 	font-size: 20px;
-    font-family: xinwei,xingkai;
+    font-family: fzhtk;
     color: rgb(77, 60, 51);
     border-radius: 5px;
     background-image: radial-gradient(rgb(255, 255, 200) 0, rgb(255, 255, 120) 50%, rgb(255, 255, 10) 80%, yellow 100%);
@@ -919,7 +875,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    font-family: xinwei, xingkai;
+    font-family: fzhtk;
     font-size: 16px;
     color: white;
     text-shadow: #000 1px 0 0, #000 0 1px 0, #000 -1px 0 0, #000 0 -1px 0, 0 0 8px #000;
@@ -943,7 +899,7 @@
     width: 100%;
     line-height: 16px;
     color: rgb(255,245,223);
-    font-family: 'shousha';
+    font-family: fzhtk;
     font-size: 16px;
     text-align: center;
     text-shadow: 0 0 2px black, 0 0 1px black;
@@ -978,7 +934,7 @@
     border: none;
     box-shadow: none;
     font-size: 19px;
-    font-family: xinwei, xingkai;
+    font-family: fzhtk;
     color: white;
     text-align: center;
     text-shadow: none;
@@ -1133,7 +1089,7 @@
     width: 100%;
     height: 32px;
     font-size: 32px;
-    font-family: 'xinwei';
+    font-family: fzhtk;
     text-align: center;
     z-index: 89;
 }
@@ -1165,7 +1121,7 @@
     line-height: 38px;
     color: rgb(210, 50, 50);
     font-size: 38px;
-	font-family: xingkai, huangcao, xinwei;
+	font-family: fzhtk;
 	font-display: swap;
     text-shadow: 0 0 5px black, 0 0 10px black, 0 0 15px black;
 	background-size: contain;
@@ -1261,7 +1217,7 @@
     border-image-source: url('assets/image/item_bg.png');
     cursor: pointer;
     color: rgb(77, 60, 51);
-    font-family: shousha;
+    font-family: fzhtk;
     font-weight: bold;
     font-size: 20px;
     text-shadow: none;

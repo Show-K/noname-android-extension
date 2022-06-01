@@ -5690,7 +5690,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 							if (lib.config.asset_skin) {
 								for (var i in skins) {
 									for (var j = 1; j <= skins[i]; j++) {
-										updates.push('image/skin/' + i + '/' + j + '.jpg');
+										updates.push('image/skin/' + i + '/' + j + '.png');
 									}
 								}
 							}
@@ -5803,7 +5803,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 					updatepx.style.marginTop = '8px';
 					var buttonx = ui.create.node('button', '访问项目主页',
 					function() {
-						window.open('https://github.com/libccy/noname');
+						window.open('https://github.com/Show-K/noname');
 					});
 					updatepx.appendChild(buttonx);
 					ui.updateUpdate = function() {
@@ -6637,7 +6637,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 						saveButton.listen(function() {
 							var current = this.parentNode.querySelector('.videonode.active');
 							if (current) {
-								game.export(lib.init.encode(JSON.stringify(current.link)), '无名杀 - 录像 - ' + current.link.name[0] + ' - ' + current.link.name[1]);
+								game.export(lib.init.encode(JSON.stringify(current.link)), '大乱桌斗 - 录像 - ' + current.link.name[0] + ' - ' + current.link.name[1]);
 							}
 						});
 

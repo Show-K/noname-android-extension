@@ -2,7 +2,7 @@
 game.import("extension", function(lib,game,ui,get,ai,_status){return { name:"十周年UI",
 content:function(config, pack){
 	'use strict';
-	if(['tafang','chess'].contains(get.mode()) && lib.config['extension_十周年UI_closeWhenChess']){
+	if (['tafang','chess'].contains(get.mode()) && lib.config['extension_十周年UI_closeWhenChess']) {
 		return;
 	}
 	var extensionName = decadeUIName;
@@ -11,8 +11,8 @@ content:function(config, pack){
 	
     if (!(extension && extension.enable && extension.enable.init)) return;
     
-	lib.arenaReady.push(function(){
-		if(ui.roundmenu){
+	lib.arenaReady.push(function() {
+		if (ui.roundmenu) {
 			ui.roundmenu.style.zIndex = 8;
 		}
 	});
@@ -456,7 +456,7 @@ content:function(config, pack){
 					
 					var hpNode = this.node.hp;
 					if (!this.storage.nohp) {
-						if (hpMax > 5) {
+						if (hpMax > 9) {
 							hpNode.innerHTML = (isNaN(hp) ? '×' : (hp == Infinity ? '∞' : hp)) + '<br>/<br>'
 								+ (isNaN(hpMax) ? '×' : (hpMax == Infinity ? '∞' : hpMax)) + '<div></div>';
 							if (hp == 0) hpNode.lastChild.classList.add('lost');
@@ -466,7 +466,7 @@ content:function(config, pack){
 							hpNode.classList.remove('textstyle');
 							while (hpMax > hpNode.childNodes.length) ui.create.div(hpNode);
 							while (hpMax < hpNode.childNodes.length) hpNode.lastChild.remove();
-	
+							
 							for (var i = 0; i < hpMax; i++) {
 								if (i < hp) {
 									hpNode.childNodes[i].classList.remove('lost');
@@ -564,13 +564,14 @@ content:function(config, pack){
 							cards.splice(i--, 1);
 							continue;
 						}
+						
 						if (gaintag)
 							card.addGaintag(gaintag);
-						var sort=lib.config.sort_card(cards[i]);
-
-						if(get.is.singleHandcard()||sort>0){
+						var sort = lib.config.sort_card(cards[i]);
+						
+						if (get.is.singleHandcard() || sort > 0) {
 							fragment.insertBefore(card, fragment.firstChild);
-						}else{
+						} else {
 							fragment2.insertBefore(card, fragment.firstChild);
 						}
 					}
@@ -581,41 +582,39 @@ content:function(config, pack){
 					}
 					
 					var s = player.getCards('s');
-					if (s.length){
+					if (s.length) {
 						var found = false;
-						for(var i=0;i<handcards.childElementCount;i++){
-							if(handcards.childNodes[i]==s[0]){
+						for (var i = 0; i < handcards.childElementCount; i++) {
+							if (handcards.childNodes[i] == s[0]) {
 								handcards.insertBefore(fragment, s[0]);
 								found = true;
 								break;
 							}
 						}
-						if(!found){
+						if (!found) {
 							handcards.appendChild(fragment);
 						}
-					}
-					else{
+					} else {
 						handcards.appendChild(fragment);
 					}
 					s = player.getCards('s');
-					if (s.length){
+					if (s.length) {
 						var found = false;
-						for(var i=0;i<handcards2.childElementCount;i++){
-							if(handcards2.childNodes[i]==s[0]){
+						for (var i = 0; i < handcards2.childElementCount; i++) {
+							if (handcards2.childNodes[i] == s[0]) {
 								handcards2.insertBefore(fragment2, s[0]);
 								found = true;
 								break;
 							}
 						}
-						if(!found){
+						if (!found) {
 							handcards2.appendChild(fragment2);
 						}
-					}
-					else{
+					} else {
 						handcards2.appendChild(fragment2);
 					}
-					
-					if(this==game.me||_status.video) ui.updatehl();
+
+					if (this == game.me || _status.video) ui.updatehl();
 					if (!_status.video) {
 						game.addVideo('directgain', this, get.cardsInfo(cards));
 						this.update();
@@ -1131,13 +1130,12 @@ content:function(config, pack){
 			
 			var EventContent = (function(EventContent){
 				EventContent.changeHp = function () {
-					//changeHujia moved here
-					if(num<0&&player.hujia>0&&event.getParent().name=='damage'&&!player.hasSkillTag('nohujia')){
-						event.hujia=Math.min(-num,player.hujia);
-						event.getParent().hujia=event.hujia;
-						event.num+=event.hujia;
-						game.log(player,'的护甲抵挡了'+get.cnNumber(event.hujia)+'点伤害');
-						player.changeHujia(-event.hujia).type='damage';
+					if (num < 0 && player.hujia > 0 && event.getParent().name == 'damage' && !player.hasSkillTag('nohujia')) {
+						event.hujia = Math.min(-num, player.hujia);
+						event.getParent().hujia = event.hujia;
+						event.num += event.hujia;
+						game.log(player, '的护甲抵挡了' + get.cnNumber(event.hujia) + '点伤害');
+						player.changeHujia(-event.hujia).type = 'damage';
 					}
 					num = event.num;
 					player.hp += num;
@@ -1163,7 +1161,7 @@ content:function(config, pack){
 				};
 				EventContent.chooseBool = function () {
 					"step 0"
-					if ((typeof event.isMine=='function')&&event.isMine()) {
+					if ((typeof event.isMine == 'function') && event.isMine()) {
 						if (event.frequentSkill && !lib.config.autoskilllist.contains(event.frequentSkill)) {
 							ui.click.ok();
 							return;
@@ -1234,7 +1232,7 @@ content:function(config, pack){
 				};
 				EventContent.chooseTarget = function () {
 					"step 0"
-					if ((typeof event.isMine=='function')&&event.isMine()) {
+					if ((typeof event.isMine == 'function') && event.isMine()) {
 						if (event.hsskill && !event.forced && _status.prehidden_skills.contains(event.hsskill)) {
 							ui.click.cancel();
 							return;
@@ -1277,10 +1275,10 @@ content:function(config, pack){
 								if (event.promptbar != 'none') {
 									var from = get.select(event.selectTarget)[0];
 									var to = get.select(event.selectTarget)[1];
-									if(!isFinite(to)){
+									if (!isFinite(to)) {
 										to = '∞';
 									}
-									event.promptbar = handTip.appendText(' '+from+' - ' + to);
+									event.promptbar = handTip.appendText(' ' + from + ' - ' + to);
 									event.promptbar.sels = 0;
 									event.promptbar.reqs = get.numStr(get.select(event.selectTarget)[1], 'target');
 									event.custom.add.target = function() {
@@ -1327,7 +1325,7 @@ content:function(config, pack){
 					if (event.onresult) {
 						event.onresult(event.result);
 					}
-					if (event.result.bool && event.autodelay && !((typeof event.isMine=='function')&&event.isMine())) {
+					if (event.result.bool && event.autodelay && !((typeof event.isMine == 'function') && event.isMine())) {
 						if (typeof event.autodelay == 'number') {
 							game.delayx(event.autodelay);
 						} else {
@@ -1363,7 +1361,7 @@ content:function(config, pack){
 						}
 						var range = get.select(event.selectCard);
 						game.check();
-						if ((typeof event.isMine=='function')&&event.isMine()) {
+						if ((typeof event.isMine == 'function') && event.isMine()) {
 							if (event.hsskill && !event.forced && _status.prehidden_skills.contains(event.hsskill)) {
 								ui.click.cancel();
 								return;
@@ -1422,11 +1420,11 @@ content:function(config, pack){
 									handTip.appendText(tipText);
 									var from = event.selectCard[0];
 									var to = event.selectCard[1];
-									if(!isFinite(to)){
+									if (!isFinite(to)) {
 										to = '∞';
 									}
 									if (Array.isArray(event.selectCard)) {
-										event.promptbar = handTip.appendText(' '+from+' - ' + to);
+										event.promptbar = handTip.appendText(' ' + from + ' - ' + to);
 										event.promptbar.sels = 0;
 										event.promptbar.reqs = get.numStr(event.selectCard[1], 'card');
 										event.custom.add.card = function() {
@@ -1482,7 +1480,7 @@ content:function(config, pack){
 						event.promptdiscard.close();
 					}
 					"step 3"
-					if (event.result.bool && event.result.cards && event.result.cards.length && !game.online && event.autodelay && !((typeof event.isMine=='function') && event.isMine())) {
+					if (event.result.bool && event.result.cards && event.result.cards.length && !game.online && event.autodelay && !((typeof event.isMine == 'function') && event.isMine())) {
 						if (typeof event.autodelay == 'number') {
 							game.delayx(event.autodelay);
 						} else {
@@ -1529,7 +1527,7 @@ content:function(config, pack){
 						if (game.modeSwapPlayer && !_status.auto && player.isUnderControl()) {
 							game.modeSwapPlayer(player);
 						}
-						if ((typeof event.isMine=='function')&&event.isMine()) {
+						if ((typeof event.isMine == 'function') && event.isMine()) {
 							if (event.hsskill && !event.forced && _status.prehidden_skills.contains(event.hsskill)) {
 								ui.click.cancel();
 								return;
@@ -1733,7 +1731,7 @@ content:function(config, pack){
 					}
 					_status.noclearcountdown = true;
 					if (event.type == 'phase') {
-						if ((typeof event.isMine=='function')&&event.isMine()) {
+						if ((typeof event.isMine == 'function') && event.isMine()) {
 							event.endButton = ui.create.control('结束回合', 'stayleft',
 							function() {
 								if (_status.event.skill) {
@@ -1755,7 +1753,7 @@ content:function(config, pack){
 							bool: false
 						}
 						return;
-					} else if ((typeof event.isMine=='function')&&event.isMine()) {
+					} else if ((typeof event.isMine == 'function') && event.isMine()) {
 						if (event.hsskill && !event.forced && _status.prehidden_skills.contains(event.hsskill)) {
 							ui.click.cancel();
 							return;
@@ -1806,7 +1804,7 @@ content:function(config, pack){
 										tipText = '请选择一张卡牌';
 									}
 									
-									if (event.type == 'phase' &&(typeof event.isMine=='function')&& event.isMine()) {
+									if (event.type == 'phase' && (typeof event.isMine == 'function') && event.isMine()) {
 										handTip.appendText('出牌阶段', 'phase');
 										tipText = '，' + tipText
 									}
@@ -2627,9 +2625,8 @@ content:function(config, pack){
 							evt.orderingCards.addArray(cards);
 							evt.orderingCards.addArray(ss);
 						}
-					} else if (event.position == ui.cardPile) {
-						game.updateRoundNumber();
 					}
+					game.updateRoundNumber();
 					if (event.toRenku) _status.renku.addArray(cards);
 					if (unmarks.length) {
 						for (var i of unmarks) {
@@ -2824,7 +2821,7 @@ content:function(config, pack){
 					if (typeof event.skillDialog == 'object') {
 						event.skillDialog.close();
 					}
-					if ((typeof event.isMine=='function') && event.isMine()) {
+					if ((typeof event.isMine == 'function') && event.isMine()) {
 						event.skillDialog = true;
 					}
 					game.uncheck();
@@ -3083,12 +3080,12 @@ content:function(config, pack){
 					
 					return this._super.phaseLoop.apply(this, arguments);
 				};
-				Game.swapSeat = function(player1,player2,prompt,behind,noanimate){
-					base.game.swapSeat.apply(this,arguments);
+				Game.swapSeat = function (player1, player2, prompt, behind, noanimate) {
+					base.game.swapSeat.apply(this, arguments);
 					player1.seat = player1.getSeatNum();
-					if(player1.node.seat)player1.node.seat.innerHTML = get.cnNumber(player1.seat, true);
+					if (player1.node.seat) player1.node.seat.innerHTML = get.cnNumber(player1.seat, true);
 					player2.seat = player2.getSeatNum();
-					if(player2.node.seat)player2.node.seat.innerHTML = get.cnNumber(player2.seat, true);
+					if (player2.node.seat) player2.node.seat.innerHTML = get.cnNumber(player2.seat, true);
 				};
 				
 				// if (get.mode() == 'boss') {
@@ -3125,7 +3122,6 @@ content:function(config, pack){
 			overrides(ui.click, Click);
 			overrides(ui.create, Create);
 			overrides(game, Game);
-			
 			
 			var ride = {};
 			ride.lib = {
@@ -3734,26 +3730,25 @@ content:function(config, pack){
 								item = item.name;
 							} else {
 								mark = ui.create.div('.card.mark');
-								if(lib.skill[item]&&lib.skill[item].markimage){
-									mark.text = decadeUI.element.create('mark-text', mark);
-									mark.text.innerHTML = " ";
+								var markText = lib.translate[item + '_bg'];
+								if (!markText || markText[0] == '+' || markText[0] == '-') {
+									markText = get.translation(item).substr(0, 2);
+									if (decadeUI.config.playerMarkStyle != 'decade') {
+										markText = markText[0];
+									}
+								}
+								mark.text = decadeUI.element.create('mark-text', mark);
+								if (lib.skill[item] && lib.skill[item].markimage) {
+									markText = '　';
 									mark.text.setBackgroundImage(lib.skill[item].markimage);
-									mark.text.style['box-shadow']='none';
+									// mark.text.style['box-shadow'] = 'none';
 									mark.text.style.backgroundPosition = 'center';
 									mark.text.style.backgroundSize = 'contain';
 									mark.text.style.backgroundRepeat = 'no-repeat';
-								}else{
-									var markText = lib.translate[item + '_bg'];
-									if (!markText || markText[0] == '+' || markText[0] == '-') {
-										markText = get.translation(item).substr(0, 2);
-										if (decadeUI.config.playerMarkStyle != 'decade') {
-											markText = markText[0];
-										}
-									}
-									mark.text = decadeUI.element.create('mark-text', mark);
+								} else {
 									if (markText.length == 2) mark.text.classList.add('small-text');
-									mark.text.innerHTML = markText;
 								}
+								mark.text.innerHTML = markText;
 							}
 							
 							mark.name = item;
@@ -3815,11 +3810,13 @@ content:function(config, pack){
 							ui.updatem(this);
 							return nodeMark;
 						},
+						
 						setSeatNum:function(){
-							base.lib.element.player.setSeatNum.apply(this,arguments);
+							base.lib.element.player.setSeatNum.apply(this, arguments);
 							this.seat = this.getSeatNum();
 							this.node.seat.innerHTML = get.cnNumber(this.seat, true);
 						},
+						
 						markSkillCharacter:function(id, target, name, content){
 							if (typeof target == 'object') target = target.name;
 							game.broadcastAll(function(player, target, name, content, id) {
@@ -3979,9 +3976,10 @@ content:function(config, pack){
 									return this;
 								}
 							}
+							
 							var mark = this.marks[name];
 							if (storage && this.storage[name]) this.syncStorage(name);
-							if (lib.skill[name] && lib.skill[name].intro && !lib.skill[name].intro.nocount && (this.storage[name] || lib.skill[name].intro.markcount || name == 'ghujia')) {
+							if (name == 'ghujia' || (lib.skill[name] && lib.skill[name].intro && !lib.skill[name].intro.nocount && (this.storage[name] || lib.skill[name].intro.markcount))) {
 								var num = 0;
 								if (typeof lib.skill[name].intro.markcount == 'function') {
 									num = lib.skill[name].intro.markcount(this.storage[name], this);
@@ -4175,12 +4173,12 @@ content:function(config, pack){
 							intro.innerText = '';
 						
 						intro.style.backgroundImage = 'url("' + decadeUIPath + 'assets/image/rarity_' + rarity + '.png")';
-						if ((button.link == 'xushu' || button.link == 'xin_xushu') && button.node && button.node.name && button.node.group){
+						if ((button.link == 'sst_massy') && button.node && button.node.name && button.node.group){
 							if (button.classList.contains('newstyle')) {
-								button.node.name.dataset.nature = 'watermm';
-								button.node.group.dataset.nature = 'water';
+								button.node.name.dataset.nature = 'thundermm';
+								button.node.group.dataset.nature = 'thunder';
 							} else {
-								button.node.group.style.backgroundColor = get.translation('weiColor');
+								button.node.group.style.backgroundColor = get.translation('shenColor');
 							}
 						}
 					},
@@ -4215,8 +4213,6 @@ content:function(config, pack){
 						var character = dui.element.create('character', node);
 						
 						if (doubleCamp) node._changeGroup = true;
-						var double=get.is.double(node._link,true);
-						if(double) node._changeGroup=true;
 						if (type=='characterx' && lib.characterReplace[node._link] && lib.characterReplace[node._link].length > 1) {
 							node._replaceButton = true;
 						}
@@ -4255,53 +4251,50 @@ content:function(config, pack){
 							
 							node.node.name.innerText = get.slimName(item).replace(/<br>/g, '\n');
 							if (lib.config.buttoncharacter_style == 'default' || lib.config.buttoncharacter_style == 'simple') {
-								if(lib.config.buttoncharacter_style=='simple'){
-									node.node.group.style.display='none';
+								if (lib.config.buttoncharacter_style == 'simple') {
+									node.node.group.style.display = 'none';
 								}
-								node.node.name.dataset.nature=get.groupnature(infoitem[1]);
-								node.node.group.dataset.nature=get.groupnature(infoitem[1],'raw');
+								node.node.name.dataset.nature = get.groupnature(infoitem[1]);
+								node.node.group.dataset.nature = get.groupnature(infoitem[1], 'raw');
 								node.classList.add('newstyle');
-								if(double&&double.length){
-									node.node.name.dataset.nature=get.groupnature(double[0]);
-									node.node.group.dataset.nature=get.groupnature(double[double.length==2?1:0]);
+								if (doubleCamp && doubleCamp.length) {
+									node.node.name.dataset.nature = get.groupnature(doubleCamp[0]);
+									node.node.group.dataset.nature = get.groupnature(doubleCamp[doubleCamp.length == 2 ? 1 : 0]);
 								}
 								ui.create.div(node.node.hp);
-								var hp=get.infoHp(infoitem[2]),maxHp=get.infoMaxHp(infoitem[2]),hujia=get.infoHujia(infoitem[2]);
-								var str=get.numStr(hp);
-								if(hp!=maxHp){
-									str+='/';
-									str+=get.numStr(maxHp);
+								var hp = get.infoHp(infoitem[2]), maxHp = get.infoMaxHp(infoitem[2]), hujia = get.infoHujia(infoitem[2]);
+								var str = get.numStr(hp);
+								if (hp != maxHp) {
+									str += '/';
+									str += get.numStr(maxHp);
 								}
-								var textnode=ui.create.div('.text',str,node.node.hp);
-								if(infoitem[2]==0){
+								var textnode = ui.create.div('.text', str, node.node.hp);
+								if (infoitem[2] == 0) {
 									node.node.hp.hide();
+								} else if (get.infoHp(infoitem[2]) <= 3) {
+									node.node.hp.dataset.condition = 'mid';
+								} else {
+									node.node.hp.dataset.condition = 'high';
 								}
-								else if(get.infoHp(infoitem[2])<=3){
-									node.node.hp.dataset.condition='mid';
-								}
-								else{
-									node.node.hp.dataset.condition='high';
-								}
-								if(hujia>0){
-									ui.create.div(node.node.hp,'.shield');
-									ui.create.div('.text',get.numStr(hujia),node.node.hp);
+								if (hujia > 0) {
+									ui.create.div(node.node.hp, '.shield');
+									ui.create.div('.text', get.numStr(hujia), node.node.hp);
 								}
 							} else {
-								var hp=get.infoHp(infoitem[2]);
-								var maxHp=get.infoMaxHp(infoitem[2]);
-								var shield=get.infoHujia(infoitem[2]);
-								if(maxHp>14){
-									if(typeof infoitem[2]=='string') node.node.hp.innerHTML=infoitem[2];
-									else node.node.hp.innerHTML=get.numStr(infoitem[2]);
+								var hp = get.infoHp(infoitem[2]);
+								var maxHp = get.infoMaxHp(infoitem[2]);
+								var shield = get.infoHujia(infoitem[2]);
+								if (maxHp > 14) {
+									if (typeof infoitem[2] == 'string') node.node.hp.innerHTML = infoitem[2];
+									else node.node.hp.innerHTML = get.numStr(infoitem[2]);
 									node.node.hp.classList.add('text');
-								}
-								else{
-									for(var i=0;i<maxHp;i++){
-										var next=ui.create.div('',node.node.hp);
-										if(i>=hp) next.classList.add('exclude');
+								} else {
+									for (var i = 0; i < maxHp; i++) {
+										var next = ui.create.div('', node.node.hp);
+										if (i >= hp) next.classList.add('exclude');
 									}
-									for(var i=0;i<shield;i++){
-										ui.create.div(node.node.hp,'.shield');
+									for (var i = 0; i < shield; i++) {
+										ui.create.div(node.node.hp, '.shield');
 									}
 								}
 							}
@@ -4367,7 +4360,9 @@ content:function(config, pack){
 						
 						for (var i in lib.element.button) node[i] = lib.element.button[i];
 						if (position) position.appendChild(node);
-						
+
+						if (type=='character'||type=='player'||type=='characterx') ui.create.rarity(node);
+
 						return node;
 					},
 					
@@ -4799,14 +4794,14 @@ content:function(config, pack){
 			
 			
 			game.updateRoundNumber = function(){
-				game.broadcastAll(function(num1, num2, top) {
+				game.broadcastAll(function(num1, num2, num3, top) {
 					_status.pileTop = top;
 					if (ui.cardPileNumber && window.decadeUI)
-						ui.cardPileNumber.textContent = '牌堆' + num2 + ' 第' + num1 + '轮';
+						ui.cardPileNumber.textContent = '牌堆' + num2 + ' 弃牌堆' + num3 + ' 第' + num1 + '轮';
 					else if (ui.cardPileNumber)
-						ui.cardPileNumber.textContent = num1 + '轮 剩余牌: ' + num2;
+						ui.cardPileNumber.textContent = num1 + '轮 剩余牌: ' + num2 + ' 弃牌堆: ' + num3;
 					
-				}, game.roundNumber, ui.cardPile.childNodes.length, ui.cardPile.firstChild);
+				}, game.roundNumber, ui.cardPile.childNodes.length, ui.discardPile.childNodes.length, ui.cardPile.firstChild);
 			};
 
 			game.check = function(event){
@@ -4879,7 +4874,7 @@ content:function(config, pack){
 							event._cardChoice = [];
 							firstCheck = true;
 						}
-						if ((typeof event.isMine=='function')&&event.isMine() && event.name == 'chooseToUse' && event.parent.name == 'phaseUse' && !event.skill && !event._targetChoice && !firstCheck && window.Map && !lib.config.compatiblemode) {
+						if ((typeof event.isMine == 'function') && event.isMine() && event.name == 'chooseToUse' && event.parent.name == 'phaseUse' && !event.skill && !event._targetChoice && !firstCheck && window.Map && !lib.config.compatiblemode) {
 							event._targetChoice = new Map();
 							for (var i = 0; i < event._cardChoice.length; i++) {
 								if (!lib.card[event._cardChoice[i].name].complexTarget) {
@@ -5054,7 +5049,7 @@ content:function(config, pack){
 					if (event._skillChoice) {
 						skills2 = event._skillChoice;
 						for (var i = 0; i < skills2.length; i++) {
-							if (((typeof event.isMine=='function')&&event.isMine()) || !event._aiexclude.contains(skills2[i])) {
+							if (((typeof event.isMine == 'function') && event.isMine()) || !event._aiexclude.contains(skills2[i])) {
 								skills.push(skills2[i]);
 							}
 						}
@@ -5088,7 +5083,7 @@ content:function(config, pack){
 							}
 							
 							if (enable) {
-								if (((typeof event.isMine=='function')&&event.isMine()) || !event._aiexclude.contains(skills2[i])) {
+								if (((typeof event.isMine == 'function') && event.isMine()) || !event._aiexclude.contains(skills2[i])) {
 									skills.add(skills2[i]);
 								}
 								event._skillChoice.add(skills2[i]);
@@ -5153,7 +5148,7 @@ content:function(config, pack){
 				} else if (_status.event.multitarget) {
 					_status.multitarget = true;
 				}
-				if ((typeof event.isMine=='function')&&event.isMine()) {
+				if ((typeof event.isMine == 'function') && event.isMine()) {
 					if (game.chess && game.me && get.config('show_distance')) {
 						for (var i = 0; i < players.length; i++) {
 							if (players[i] == game.me) {
@@ -5300,9 +5295,9 @@ content:function(config, pack){
 			    return result;
 			};
 			
-			game.linexy = function(path){
+			game.linexy = function(path, option){
 				if (!decadeUI.config.playerLineEffect) return gameLinexyFunction.apply(this, arguments);
-				decadeUI.effect.line(path);
+				decadeUI.effect.line(path, option);
 			};
 			
 			ui.click.intro = function(e){
@@ -5424,13 +5419,12 @@ content:function(config, pack){
                 } else {
                     if (get.mode() == 'guozhan') {
                         identityList = {
-                            wei: '魏',
-                            shu: '蜀',
-                            wu: '吴',
-                            qun: '群',
-							jin: '晋',
+							sst_light:'光',
+							sst_dark:'暗',
+							sst_spirit:'魂',
+							sst_reality:'现',
+							sst_smash:'斗',
                         };
-						if (_status.forceKey) identityList.key = '键';
                     }
                     
 					if (!dui.$identityMarkBox) {
@@ -5869,7 +5863,7 @@ content:function(config, pack){
 				
 				campWrap.appendChild(player.node.name);
 				campWrap.node.avatarName.className = 'avatar-name';
-				campWrap.node.avatarDefaultName.innerHTML = '主<br>将';
+				campWrap.node.avatarDefaultName.innerHTML = '主将';
 				
 				var node = {
 					mask: player.insertBefore(decadeUI.element.create('mask'), player.node.identity),
@@ -5920,11 +5914,14 @@ content:function(config, pack){
 					group: {
 						configurable: true,
 						get:function(){
+							if (this.node.campWrap.dataset.camp == 'sst_reality_shen') return 'sst_reality';
 							return this.node.campWrap.dataset.camp;
 						},
 						set:function(value){
 							this.node.campWrap.dataset.camp = value;
-							
+
+							if (this.name == 'sst_massy' && value == 'sst_reality') this.node.campWrap.dataset.camp = 'sst_reality_shen';
+
 							if (value){
 								if (decadeUI.config.campIdentityImageMode){
 								    var that = this;
@@ -6054,7 +6051,7 @@ content:function(config, pack){
 			    lib.config.glow_phase = '';
 			    initCssstylesFunction.call(this);
 			    lib.config.glow_phase = temp;
-				ui.css.styles.sheet.insertRule('.avatar-name, .avatar-name-default { font-family: "' + (lib.config.name_font || 'xinkai') + '", "xinwei" }', 0);
+				ui.css.styles.sheet.insertRule('.avatar-name, .avatar-name-default { font-family: fzhtk }', 0);
 			};
 
 			lib.init.layout = function(layout, nosave){
@@ -6864,7 +6861,7 @@ content:function(config, pack){
 					
 					event.player.wait();
 					decadeUI.game.wait();
-				} else if (!(typeof event.isMine=='function' && event.isMine())) {
+				} else if (!(typeof event.isMine == 'function' && event.isMine())) {
 					event.switchToAuto();
 				}
 				"step 1"
@@ -9494,6 +9491,7 @@ content:function(config, pack){
 					event.step++;
 				}
 			}
+			game.updateDiscardpile();
 			
 			var delta = performance.now() - game.loopTime;
 			if (delta > 15 && decadeUI.config.smoothMode) {
@@ -9586,7 +9584,7 @@ precontent:function(){
 			node.created = true;
 			node.style.overflow = 'scroll';
 			
-			var list = ['re_caocao', 're_liubei', 'sp_zhangjiao', 'sunquan'];
+			var list = ['sst_marth', 'sst_bowser', 'sst_master_hand', 'sst_ma'];
 			for (var i = 0; i < 4; i++) {
 				var player = ui.create.div('.seat-player.fakeplayer', node);
 				ui.create.div('.avatar', player).setBackground(list.randomRemove(), 'character');
@@ -9724,67 +9722,9 @@ config:{
     },
 	dynamicBackground:{
 		name: '动态背景',
-		init: 'skin_xiaosha_default',
+		init: 'off',
 		item:{
 			off: '关闭',
-			skin_xiaosha_default: 				'小杀',
-			skin_baosanniang_漫花剑俏: 			'鲍三娘-漫花剑俏',
-			skin_baosanniang_舞剑铸缘: 			'鲍三娘-舞剑铸缘',
-			skin_caiwenji_才颜双绝: 			'蔡文姬-才颜双绝',
-			skin_caojie_凤历迎春: 				'曹　节-凤历迎春',
-			skin_caojie_战场绝版: 				'曹　节-战场绝版',
-			skin_caoying_巾帼花舞: 				'曹　婴-巾帼花舞',
-			skin_daqiao_清萧清丽: 				'大　乔-清萧清丽',
-			skin_daqiao_衣垂绿川:				'大　乔-衣垂绿川',
-			skin_daqiao_战场绝版: 				'大　乔-战场绝版',
-			skin_daqiaoxiaoqiao_战场绝版: 		'大乔小乔-战场绝版',
-			skin_diaochan_玉婵仙子: 			'貂　蝉-玉婵仙子',
-			skin_diaochan_战场绝版: 			'貂　蝉-战场绝版',
-			skin_dongbai_娇俏伶俐: 				'董　白-娇俏伶俐',
-			skin_fuhuanghou_万福千灯: 			'伏皇后-万福千灯',
-			skin_fanyufeng_斟酒入情: 			'樊玉凤-斟酒入情',
-			skin_guozhao_雍容尊雅: 				'郭　照-雍容尊雅',
-			skin_huaman_花俏蛮娇: 				'花　鬘-花俏蛮娇',
-			skin_huaman_经典形象: 				'花　鬘-经典形象',
-			skin_hetaihou_鸩毒除患: 			'何太后-鸩毒除患',
-			skin_hetaihou_蛇蝎为心: 			'何太后-蛇蝎为心',
-			skin_hetaihou_耀紫迷幻: 			'何太后-耀紫迷幻',
-			skin_lukang_毁堰破晋: 				'陆　抗-毁堰破晋',
-			skin_luxun_谋定天下: 				'陆　逊-谋定天下',
-			skin_luxunlvmeng_清雨踏春: 			'陆逊吕蒙-清雨踏春',
-			skin_mayunlu_战场绝版: 				'马云騄-战场绝版',
-			skin_sundengzhoufei_鹊星夕情: 		'孙登周妃-鹊星夕情',
-			skin_sunluban_宵靥谜君: 			'孙鲁班-宵靥谜君',
-			skin_sunluyu_娇俏伶俐: 				'孙鲁育-娇俏伶俐',
-			skin_shuxiangxiang_花好月圆: 		'蜀香香-花好月圆',
-			skin_shuxiangxiang_花曳心牵:		'蜀香香-花曳心牵',
-			skin_wangrong_云裳花容: 			'王　荣-云裳花容',
-			skin_wangyi_绝色异彩: 				'王　异-绝色异彩',
-			skin_wangyi_战场绝版: 				'王　异-战场绝版',
-			skin_wolongzhuge_隆中陇亩: 			'卧龙诸葛-隆中陇亩',
-			skin_wuxian_锦运福绵: 				'吴　苋-锦运福绵',
-			skin_wuxian_金玉满堂: 				'吴　苋-金玉满堂',
-			skin_xiahoushi_端华夏莲: 			'夏侯氏-端华夏莲',
-			skin_xiahoushi_战场绝版: 			'夏侯氏-战场绝版',
-			skin_xiaoqiao_花好月圆: 			'小　乔-花好月圆',
-			skin_xiaoqiao_采莲江南: 			'小　乔-采莲江南',
-			skin_xinxianying_英装素果: 			'辛宪英-英装素果',
-			skin_xushi_拈花思君: 				'徐　氏-拈花思君',
-			skin_xushi_为夫弑敌: 				'徐　氏-为夫弑敌',
-			skin_zhangchangpu_钟桂香蒲: 		'张昌蒲-钟桂香蒲',
-			skin_zhangchunhua_花好月圆: 		'张春华-花好月圆',
-			skin_zhangchunhua_战场绝版: 		'张春华-战场绝版',
-			skin_zhoufei_晴空暖鸢: 				'周　妃-晴空暖鸢',
-			skin_zhangqiying_逐鹿天下: 			'张琪瑛-逐鹿天下',
-			skin_zhangqiying_岁稔年丰: 			'张琪瑛-岁稔年丰',
-			skin_zhenji_才颜双绝: 				'甄　姬-才颜双绝',
-			skin_zhenji_洛神御水: 				'甄　姬-洛神御水',
-			skin_zhugeguo_兰荷艾莲: 			'诸葛果-兰荷艾莲',
-			skin_zhugeguo_仙池起舞: 			'诸葛果-仙池起舞',
-			skin_zhugeguo_英装素果: 			'诸葛果-英装素果',
-			skin_zhugeliang_空城退敌: 			'诸葛亮-空城退敌',
-			skin_zhouyi_剑舞浏漓: 				'周　夷-剑舞浏漓',
-			skin_zhangxingcai_凯旋星花: 		'张星彩-凯旋星花',
 		},
 		update:function(){
 			if (!window.decadeUI) return;
@@ -9806,7 +9746,7 @@ config:{
     },
 	dynamicSkinOutcrop:{
 		name: '动皮露头',
-        init: true,
+        init: false,
 		update:function(){
 			if (window.decadeUI) {
 				var enable = lib.config['extension_十周年UI_dynamicSkinOutcrop'];
@@ -9880,20 +9820,6 @@ config:{
 			if (window.decadeUI) ui.arena.dataset.outcropSkin = lib.config['extension_十周年UI_outcropSkin'] ? 'on' : 'off';
 		}
 	},
-	borderLevel:{
-		name: '玩家边框等阶',
-        init: 'five',
-        item:{
-            one:'一阶',
-			two:'二阶',
-			three:'三阶',
-			four:'四阶',
-			five:'五阶',
-        },
-		update:function(){
-			if (window.decadeUI) ui.arena.dataset.borderLevel = lib.config['extension_十周年UI_borderLevel'];
-		}
-	},
 	gainSkillsVisible:{
 		name: '获得技能显示',
         init: 'on',
@@ -9908,7 +9834,7 @@ config:{
 	},
 	playerMarkStyle:{
         name: '人物标记样式',
-        init: 'yellow',
+        init: 'decade',
         item:{
             red:'红色',
 			yellow:'黄色',
@@ -9965,10 +9891,10 @@ package:{
 		
 		return '<p style="color:rgb(210,210,000); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;">' + log.join('<br>') + '</p>';
 	})(),
-    author:"短歌 QQ464598631",
+    author:"原作者：短歌 QQ464598631<br>修改者（未经允许）：Show-K",
     diskURL:"",
     forumURL:"",
-    version:"1.2.0.220114.5",
+    version:"1.2.0.220114.5SST",
 },
 files:{
     "character":[],

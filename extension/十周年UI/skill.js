@@ -917,7 +917,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 			content:function(){
 				var num = get.population('qun');
 				if (player.hasSkill('huangjintianbingfu')) {
-					num+=player.getExpansions('huangjintianbingfu').length;
+					num += player.storage.huangjintianbingfu.length;
 				}
 				
 				var cards = get.cards(num);
