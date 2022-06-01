@@ -14,7 +14,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 	 */
 	function canUpdate() {
 		if (typeof game.writeFile != 'function') {
-			return '此版本无名杀不支持写入文件！';
+			return '此版本大乱桌斗不支持写入文件！';
 		}
 		
 		if (!navigator.onLine) {
@@ -280,8 +280,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 		precontent: function() {
 			// 添加两个更新地址
 			Object.assign(lib.updateURLS, {
-				fastgit: 'https://raw.fastgit.org/libccy/noname',
-				xuanwu: 'https://kuangthree.coding.net/p/nonamexwjh/d/nonamexwjh/git/raw'
+				fastgit: 'https://raw.fastgit.org/Show-K/noname/super-smash-tabletop'
 			});
 			
 			// 初始化，更新地址修改回coding
@@ -311,8 +310,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					item:{
 						coding: 'Coding',
 						github: 'GitHub',
-						fastgit: 'GitHub镜像',
-						xuanwu: '玄武镜像'
+						fastgit: 'GitHub镜像'
 					},
 					onclick: function(item) {
 						game.saveConfig('update_link', item);
@@ -325,8 +323,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			game.getFastestUpdateURL = function (updateURLS = lib.updateURLS, translate = {
 				coding: 'Coding',
 				github: 'GitHub',
-				fastgit: 'GitHub镜像',
-				xuanwu: '玄武镜像'
+				fastgit: 'GitHub镜像'
 			}) {
                 if (typeof updateURLS != 'object') throw new TypeError('updateURLS must be an object type');
                 if (typeof translate != 'object') throw new TypeError('translate must be an object type');
@@ -336,7 +333,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     const url = updateURLS[key];
                     const start = new Date().getTime();
                     promises.push(
-                        fetch(`${url}/master/game/update.js`)
+                        fetch(`${url}/game/update.js`)
                             .then(response => {
                                 if (!response.ok) {
                                     return {
@@ -433,7 +430,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				game.saveConfigValue('brokenFile');
 				
 				if(url.indexOf('http') != 0){
-					url = lib.updateURL + '/master/' + url;
+					url = lib.updateURL + '/' + url;
 				}
 				
 				function success() {
@@ -747,7 +744,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
             show_version: {
                 clear: true,
                 nopointer: true,
-                name: '扩展版本： v1.32',
+                name: '扩展版本： v1.32SST',
             },
             update_link_explain: {
                 clear: true,
@@ -759,7 +756,6 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     coding: 'Coding',
                     github: 'GitHub',
                     fastgit: 'GitHub镜像',
-                    xuanwu: '玄武镜像',
                 },
                 onclick: function (item) {
                     let str;
@@ -772,9 +768,6 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             break;
                         case 'fastgit':
                             str = 'github的镜像网址，拥有在国内访问的能力，但是偶尔会很卡，推荐使用此更新源';
-                            break;
-                        case 'xuanwu':
-                            str = '由寰宇星城创建的更新源，和coding差不多，不过使用此更新源的人少，不容易崩溃。但是版本的更新需要他在苏婆更新后手动拉代码到服务器上';  
                             break;
                     }
                     typeof str != 'undefined' && alert(str);
@@ -799,7 +792,6 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					coding: 'Coding',
 					github: 'GitHub',
 					fastgit: 'GitHub镜像',
-					xuanwu: '玄武镜像',
 				},
 				onclick: function(item) {
 					if (item != game.getExtensionConfig('在线更新', 'update_link')) {
@@ -875,7 +867,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     game.unwantedToUpdate = false;
                     // 获取更新失败超过一定次数提示更换更新源
                     typeof game.updateErrors == 'number' ? game.updateErrors++ : game.updateErrors = 0;
-					const updateURL = lib.updateURL + '/master/';
+					const updateURL = lib.updateURL + '/';
 					/** 还原状态 */
 					const reduction = () => {
 						game.Updating = false;
@@ -1152,7 +1144,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			},
 			updateAll: {
 				init: false,
-				intro: '更新游戏时，下载所有主要文件（不包括素材），如果你自行修改了无名杀本体的theme等文件夹下的素材，建议不要开启此选项',
+				intro: '更新游戏时，下载所有主要文件（不包括素材），如果你自行修改了大乱桌斗本体的theme等文件夹下的素材，建议不要开启此选项',
 				name: '强制更新所有主文件',
 				onclick: (bool) => {
 					game.saveExtensionConfig('在线更新', 'updateAll', bool);
@@ -1196,7 +1188,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     game.unwantedToUpdateAsset = false;
                     // 获取更新失败超过一定次数提示更换更新源
                     typeof game.updateErrors == 'number' ? game.updateErrors++ : game.updateErrors = 0;
-					let updateURL = lib.updateURL + '/master/';
+					let updateURL = lib.updateURL + '/';
 					/** 还原状态 */
 					let reduction = () => {
 						game.UpdatingForAsset = false;
@@ -1292,7 +1284,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 									//如果更新素材
 									for (let i in skins) {
 										for (let j = 1; j <= skins[i]; j++) {
-											updates.push('image/skin/' + i + '/' + j + '.jpg');
+											updates.push('image/skin/' + i + '/' + j + '.png');
 										}
 									}
 								}
@@ -1457,7 +1449,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                 onclick: assetConfigFun('assetAudio')
 			},
 			assetSkin: {
-				init: false,
+				init: true,
 				intro: '检查更新时，检查皮肤文件',
 				name: '检查皮肤素材',
                 onclick: assetConfigFun('assetSkin')
@@ -1479,9 +1471,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				nopointer: true,
 				name: `</br>
 					最新完整包下载地址1：
-					<a target='_self' href='https://hub.fastgit.org/libccy/noname/archive/refs/heads/master.zip'><span style='text-decoration: underline;'>点击下载</span></a></br>
+					<a target='_self' href='https://hub.fastgit.org/Show-K/noname/archive/refs/heads/super-smash-tabletop.zip'><span style='text-decoration: underline;'>点击下载</span></a></br>
 					最新完整包下载地址2：
-					<a target='_self' href='https://hub.fastgit.xyz/libccy/noname/archive/refs/heads/master.zip'><span style='text-decoration: underline;'>点击下载</span></a>
+					<a target='_self' href='https://hub.fastgit.xyz/Show-K/noname/archive/refs/heads/super-smash-tabletop.zip'><span style='text-decoration: underline;'>点击下载</span></a>
 				`,
 			}
 		},
@@ -1493,10 +1485,10 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				点击按钮即可在线更新，文件下载失败会自动重新下载。目前已经覆盖了游戏自带的更新按钮</br>
 				<span style='color:red'>※请不要在更新时关闭游戏或主动断网，否则后果自负</span></br>
 			`,
-			author: "诗笺",
+			author: "原作者：诗笺<br>修改者（未经允许）：Show-K",
 			diskURL: "",
 			forumURL: "",
-			version: "1.32",
+			version: "1.32SST",
 		},
 	}
 });
