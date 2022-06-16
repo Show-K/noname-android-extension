@@ -164,6 +164,83 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					game.loop();
 				}
 			};
+
+			/** 修改游戏导入设置 */
+			const changeImportData = setInterval(() => {
+				if (!ui.import_data_button) return;
+				/** 确定按钮 */
+				const button = ui.import_data_button.querySelector('button');
+				if (!button) return;
+				const extensions = lib.config.extensions;
+				button.onclick = function(e) {
+					const fileToLoad = this.previousSibling.files[0];
+					if (fileToLoad) {
+						const fileReader = new FileReader();
+						fileReader.onload = function (fileLoadedEvent) {
+							/** @type { string | object } */
+							// @ts-ignore
+							let data = fileLoadedEvent.target.result;
+							if (!data) return;
+							try {
+								data = JSON.parse(lib.init.decode(data));
+								if (!data || typeof data != 'object') {
+									throw ('err');
+								}
+								// @ts-ignore
+								if (lib.db && (!data.config || !data.data)) {
+									throw ('err');
+								}
+							}
+							catch (e) {
+								console.log(e);
+								if (e == 'err') {
+									alert('导入文件格式不正确');
+								} else {
+									alert('导入失败： ' + e.message);
+								}
+								return;
+							}
+							alert('导入成功');
+							if (!lib.db) {
+								const noname_inited = localStorage.getItem('noname_inited');
+								const onlineKey = localStorage.getItem(lib.configprefix + 'key');
+								localStorage.clear();
+								if (noname_inited) {
+									localStorage.setItem('noname_inited', noname_inited);
+								}
+								if (onlineKey) {
+									localStorage.setItem(lib.configprefix + 'key', onlineKey);
+								}
+								for (let i in data) {
+									localStorage.setItem(i, data[i]);
+								}
+							}
+							else {
+								for (let i in data.config) {
+									game.putDB('config', i, data.config[i]);
+									lib.config[i] = data.config[i];
+								}
+								for (let i in data.data) {
+									game.putDB('data', i, data.data[i]);
+								}
+								// 现有扩展的合并
+								if (confirm('导入配置是否额外保存现有扩展？\n否则只保留SJ Settings扩展')) {
+									lib.config.extensions = [...new Set([...lib.config.extensions, ...extensions])];
+								} else {
+									lib.config.extensions = [...new Set([...lib.config.extensions, 'SJ Settings'])];
+								}
+								game.saveConfigValue('extensions');
+							}
+							lib.init.background();
+							game.reload();
+						};
+						fileReader.readAsText(fileToLoad, "UTF-8");
+					} else {
+						alert('请选择导入的游戏设置');
+					}
+				};
+				clearInterval(changeImportData);
+			}, 500);
 		},
 		precontent: function() {
 			const emptyFun = () => {};
@@ -177,7 +254,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						alert("扩展" + name + "导入完成。正在重新启动。");
 						cordova.exec(game.reload, game.reload, 'FinishImport', 'importReceived', []);
 					}
-				}, () => {}, 'FinishImport', 'importReady', []);
+				}, () => {
+					console.error('未从其他应用解压zip');
+				}, 'FinishImport', 'importReady', []);
 				// @ts-ignore
 				const permissions = cordova.plugins.permissions;
 				// 请求写入权限, 不然可能不能读写扩展
@@ -217,9 +296,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								showDialog(extNames);
 							})
 							.catch(e => {
-								console.log(e);
-								if (navigator.onLine) getExtensions();
-								else alert('当前网络未连接');
+								alert(typeof e == 'string' ? '网络请求错误' : e.message);
+								if (_status.getExtensionsDialog) {
+									_status.getExtensionsDialog.show();
+								} else {
+									if (navigator.onLine) {
+										setTimeout(getExtensions, 500);
+									}
+									else alert('当前网络未连接');
+								}
 							})
 					};
 
@@ -252,8 +337,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								// 要更新的版本是 无
 								return true;
 							} else {
-								return version_2.every((v, i) => {
-									return v >= (version_1[i] || 0);
+								return version_2.some((v, i) => {
+									return v > (version_1[i] || 0);
 								});
 							}
 						};
@@ -525,7 +610,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.21",
+			version: "1.23",
 		}
 	};
 });
