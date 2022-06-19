@@ -10,8 +10,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 	}
 
 	if (typeof game.writeFile != 'function') {
-		alert('【在线更新】扩展不能导入在不能写入文件的无名杀');
-		throw new Error('【在线更新】扩展不能导入在不能写入文件的无名杀');
+		alert('【在线更新】扩展不能导入在不能写入文件的大乱桌斗');
+		throw new Error('【在线更新】扩展不能导入在不能写入文件的大乱桌斗');
 	}
 
 	/**
@@ -84,7 +84,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 		}
 
 		if (typeof game.updateErrors == 'number' && game.updateErrors >= 5) {
-			alert('检测到获取更新失败次数过多，建议您更换无名杀的更新源');
+			alert('检测到获取更新失败次数过多，建议您更换大乱桌斗的更新源');
 			game.updateErrors = 0;
 		}
 	};
@@ -207,7 +207,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 		name: "在线更新",
 		editable: false,
 		content: function(config, pack) {
-            // 替换无名杀自带的更新功能
+            // 替换大乱桌斗自带的更新功能
             const { checkForUpdate, checkForAssetUpdate } = this[4].code.config;
 
 			/** @type HTMLButtonElement */
