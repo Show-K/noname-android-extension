@@ -70,8 +70,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				const translate = {
 					coding: 'Coding',
 					github: 'GitHub',
-					fastgit: 'GitHub镜像',
-					xuanwu: '玄武镜像'
+					fastgit: 'GitHub镜像'
 				};
 				let url_in_updateURLS;
 				for (const updateURL in lib.updateURLS) {
@@ -882,8 +881,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				item: {
 					coding: 'Coding',
 					github: 'GitHub',
-					fastgit: 'GitHub镜像',
-					xuanwu: '玄武镜像',
+					fastgit: 'GitHub镜像'
 				},
 				onclick: function (item) {
 					if (item != game.getExtensionConfig('在线更新', 'update_link')) {
