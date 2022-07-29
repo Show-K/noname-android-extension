@@ -2296,7 +2296,7 @@ content:function(config, pack){
 						player = player.next;
 					} while ( player != end );
 					event.changeCard = get.config('change_card');
-					if (_status.connectMode || (lib.config.mode == 'doudizhu' && _status.mode == 'online') || lib.config.mode != 'identity' && lib.config.mode != 'guozhan' && lib.config.mode != 'doudizhu') {
+					if (_status.connectMode || (lib.config.mode == 'doudizhu' && _status.mode == 'online') || lib.config.mode != 'identity' && lib.config.mode != 'guozhan' && lib.config.mode != 'doudizhu' && lib.config.mode != 'th_mougong') {
 						event.changeCard = 'disabled';
 					}
 					"step 1"
@@ -8570,7 +8570,7 @@ content:function(config, pack){
 			var translated = false;
 			if (!chinese) {
 				switch (mode) {
-					case 'identity':
+					case 'identity': case 'th_mougong':
 						if (!player.isAlive() || player.identityShown || player == game.me) {
 							identity = (player.special_identity ? player.special_identity : identity).replace(/identity_/, '');
 						}
@@ -8622,7 +8622,7 @@ content:function(config, pack){
 				}
 			} else {
 				switch(mode){
-					case 'identity':
+					case 'identity': case 'th_mougong':
 						if (identity.indexOf('cai') < 0) {
 							if (isMark) {
 								if (player.special_identity) identity = player.special_identity + '_bg';
