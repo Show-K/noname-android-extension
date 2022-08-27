@@ -1051,9 +1051,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				init: '无',
 				item: {
 					无: '无',
+					coding: 'Coding',
 					github: 'GitHub',
 					fastgit: 'GitHub镜像',
-					URC: 'URC',
 				},
 				onclick: function (item) {
 					let str;

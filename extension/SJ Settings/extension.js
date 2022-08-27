@@ -19,7 +19,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		}
 	}
 	game.saveConfigValue('extensions');
-	
+
 	//避免提示是否下载图片和字体素材
 	if (!lib.config.asset_version) {
 		game.saveConfig('asset_version', '无');
@@ -273,8 +273,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				}
 			};
 		},
-		precontent: function() {
-			const emptyFun = () => {};
+		precontent: function () {
+			const emptyFun = () => { };
 
 			document.addEventListener('deviceready', () => {
 				// @ts-ignore
@@ -431,7 +431,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							right: '15px',
 							width: '65px',
 							top: '15px'
-						}, function() {
+						}, function () {
 							delete _status.isGettingExtensions;
 							ui.dialog.show();
 							ui.control.show();
@@ -537,7 +537,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							});
 							const span = ui.create.node('span', download, {
 								innerHTML: '是否下载此扩展'
-							}, function() {
+							}, function () {
 								checkbox.click();
 							});
 						}
@@ -581,7 +581,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						const download = () => {
 							if (extList.length) {
 								const currentExt = extList.shift();
-								let i = 0, 
+								let i = 0,
 									files = window['noname_android_extension'][currentExt].files,
 									max = files.length;
 								/** 重新下载 */
@@ -668,7 +668,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					ui.dialog.hide();
 					ui.control.hide();
 					if (_status.getExtensionsDialog) {
-						 _status.getExtensionsDialog.show();
+						_status.getExtensionsDialog.show();
 					} else {
 						getExtensions();
 					}
@@ -679,7 +679,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				intro: '跳转到文件管理页面，选择一个配置文件并导入(通常是在files/无名杀 - 数据 - xxxx)',
 				clear: true,
 				onclick() {
-					const emptyFun = () => {};
+					const emptyFun = () => { };
 					cordova.exec(emptyFun, emptyFun, 'FinishImport', 'listView', ['file', 'readFile']);
 				}
 			},
