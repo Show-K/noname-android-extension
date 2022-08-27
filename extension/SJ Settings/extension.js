@@ -117,7 +117,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			};
 
 			/**
-			 * 对选择文件或路径选择后返回到无名杀后执行的代码
+			 * 对选择文件或路径选择后返回到大乱桌斗后执行的代码
 			 * @param { object } result
 			 * @param { string } result.path 文件地址
 			 * @param { boolean } result.isDirectory 是否是文件夹
@@ -130,7 +130,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				if (type == 'file') {
 					if (!isDirectory && data) {
 						const split = path.split('/');
-						if (split[split.length - 1].startsWith('无名杀 - 数据')) {
+						if (split[split.length - 1].startsWith('大乱桌斗 - 数据')) {
 							noname_shijianInterfaces.importConfigData(data);
 						}
 					}
@@ -676,7 +676,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			},
 			listView: {
 				name: '<button>选择导入配置文件</button>',
-				intro: '跳转到文件管理页面，选择一个配置文件并导入(通常是在files/无名杀 - 数据 - xxxx)',
+				intro: '跳转到文件管理页面，选择一个配置文件并导入(通常是在files/大乱桌斗 - 数据 - xxxx)',
 				clear: true,
 				onclick() {
 					const emptyFun = () => { };
