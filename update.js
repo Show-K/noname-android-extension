@@ -7,7 +7,7 @@ window['noname_android_extension'] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "65.58KB"
+		"size": "66.72KB"
 	},
 	"SJ Settings": {
 		"version": "1.29(Show-K修改)",
@@ -18,7 +18,7 @@ window['noname_android_extension'] = {
 			"extension/SJ Settings/extension.js",
 			"extension/SJ Settings/typings/index.d.ts"
 		],
-		"size": "28.03KB"
+		"size": "28.04KB"
 	},
 	"全能搜索": {
 		"version": "2.15",
