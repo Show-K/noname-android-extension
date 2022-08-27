@@ -740,7 +740,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		},
 		package: {
 			intro: "本扩展的功能是导入\"从其他应用使用大乱桌斗打开的扩展包\"，请勿删除",
-			author: "诗笺",
+			author: "诗笺(Show-K修改)",
 			diskURL: "",
 			forumURL: "",
 			version: "1.29",
