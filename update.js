@@ -7,7 +7,7 @@ window['noname_android_extension'] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "66.72KB"
+		"size": "59.30KB"
 	},
 	"SJ Settings": {
 		"version": "1.29",
@@ -21,8 +21,8 @@ window['noname_android_extension'] = {
 		"size": "28.04KB"
 	},
 	"全能搜索": {
-		"version": "2.15",
-		"author": "诗笺",
+		"version": "2.15SST",
+		"author": "诗笺(Show-K修改)",
 		"intro": "用于在游戏内便捷地搜索各种武将,技能和相应代码",
 		"files": [
 			"extension/全能搜索/catalogTemplate.txt",
@@ -33,13 +33,11 @@ window['noname_android_extension'] = {
 			"extension/全能搜索/updateContent",
 			"extension/全能搜索/css/extension.css",
 			"extension/全能搜索/css/vs2015.min.css",
-			"extension/全能搜索/img/picture.png",
 			"extension/全能搜索/img/qhly_pic_playaudiobutton.png",
-			"extension/全能搜索/img/相爱相杀.png",
 			"extension/全能搜索/languages/javascript.min.js",
 			"extension/全能搜索/typings/index.d.ts"
 		],
-		"size": "5.44MB"
+		"size": "232.86KB"
 	},
 	"十周年UI": {
 		"nonameVersion": "1.9.115",

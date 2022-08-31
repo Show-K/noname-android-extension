@@ -1618,6 +1618,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							"step 2"
 							event.resume();
 							if (event.result) {
+								if (event.result._sendskill) {
+									lib.skill[event.result._sendskill[0]] = event.result._sendskill[1];
+								}
 								if (event.result.skill) {
 									var info = get.info(event.result.skill);
 									if (info && info.chooseButton) {
@@ -1889,6 +1892,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							}
 							event.resume();
 							if (event.result) {
+								if (event.result._sendskill) {
+									lib.skill[event.result._sendskill[0]] = event.result._sendskill[1];
+								}
 								if (event.result.skill) {
 									var info = get.info(event.result.skill);
 									if (info && info.chooseButton) {
@@ -4189,13 +4195,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						create: {
 							rarity: function (button) {
 								var rarity = game.getRarity(button.link);
-								var intro = button.node.intro;
-								intro.classList.add('showintro');
-								intro.classList.add('rarity');
-								if (intro.innerText)
-									intro.innerText = '';
+								if (lib.config.show_rarity) {
+									var intro = button.node.intro;
+									intro.classList.add('showintro');
+									intro.classList.add('rarity');
+									if (intro.innerText)
+										intro.innerText = '';
 
-								intro.style.backgroundImage = 'url("' + decadeUIPath + 'assets/image/rarity_' + rarity + '.png")';
+									intro.style.backgroundImage = 'url("' + decadeUIPath + 'assets/image/rarity_' + rarity + '.png")';
+								}
 								if ((button.link == 'sst_massy') && button.node && button.node.name && button.node.group) {
 									if (button.classList.contains('newstyle')) {
 										button.node.name.dataset.nature = 'thundermm';
@@ -7091,6 +7099,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							node.textContent = num;
 							node.dataset.text = num;
 							node.nature = nature || 'soil';
+							node.dataset.nature = node.nature;
 							this.damagepopups.push(node);
 						}
 

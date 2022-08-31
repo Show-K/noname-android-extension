@@ -562,7 +562,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                                 return;
                             }
                             if (!qnssVariable.player && !qnssVariable.card) {
-                                qnssVariable.player = ui.create.player().init('sunce');
+                                qnssVariable.player = ui.create.player().init('sst_mario');
                                 qnssVariable.card = game.createCard('sha');
                             }
                             // 清空ul
@@ -1070,7 +1070,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     }
 
                     if (!qnssVariable.player && !qnssVariable.card) {
-                        qnssVariable.player = ui.create.player().init('sunce');
+                        qnssVariable.player = ui.create.player().init('sst_mario');
                         qnssVariable.card = game.createCard('sha');
                     }
 
@@ -1373,8 +1373,6 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 							canAddToDataList && this.addToDataList(result);
 						}
 					}
-
-                    ui.background.setBackgroundImage("extension/全能搜索/img/" + ['相爱相杀', 'picture'].randomGet() + ".png");
                 }
             }
 
@@ -1446,8 +1444,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 		},
 		package: {
 			intro: '【武将卡牌搜索器】的重命名版本,导入后会自动卸载【武将卡牌搜索器】。',
-			author: "<span class='bluetext'>诗笺</span>",
-			version: "2.15",
+			author: "<span class='bluetext'>诗笺(Show-K修改)</span>",
+			version: "2.15SST",
 		},
 	}
 });
