@@ -1,16 +1,27 @@
 window['noname_android_extension'] = {
+	"在线更新": {
+		"version": "1.42SST",
+		"author": "诗笺(Show-K修改)",
+		"intro": "用于更新无名杀版本，<span style=\"color: red;\">基本实现0崩溃</span>。",
+		"files": [
+			"extension/在线更新/extension.css",
+			"extension/在线更新/extension.js",
+			"extension/在线更新/typings/index.d.ts"
+		],
+		"size": "68.12KB"
+	},
 	"在线更新C": {
 		"version": "1.34CSST",
 		"author": "诗笺(Show-K修改)",
-		"intro": "用于更新无名杀版本，<span style=\"color: red;\">基本实现0崩溃</span>。",
+		"intro": "（兼容版）用于更新无名杀版本，<span style=\"color: red;\">基本实现0崩溃</span>。",
 		"files": [
 			"extension/在线更新C/extension.js",
 			"extension/在线更新C/typings/index.d.ts"
 		],
-		"size": "59.36KB"
+		"size": "59.40KB"
 	},
 	"SJ Settings": {
-		"version": "1.29",
+		"version": "1.292SST",
 		"author": "诗笺(Show-K修改)",
 		"intro": "诗笺版（安卓）无名杀自带的SJ Settings扩展是用于导入“从其他应用使用无名杀打开的扩展包”，请勿删除<span style=\"color: red;\">注：从1.26版本起，扩展版本最好和app版本对应</span>",
 		"files": [
@@ -18,7 +29,7 @@ window['noname_android_extension'] = {
 			"extension/SJ Settings/extension.js",
 			"extension/SJ Settings/typings/index.d.ts"
 		],
-		"size": "28.04KB"
+		"size": "28.42KB"
 	},
 	"全能搜索": {
 		"version": "2.15SST",

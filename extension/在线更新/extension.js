@@ -108,8 +108,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				const translate = {
 					coding: 'Coding',
 					github: 'GitHub',
-					fastgit: 'GitHub镜像',
-					xuanwu: '玄武镜像'
+					fastgit: 'GitHub镜像'
 				};
 				let url_in_updateURLS;
 				for (const updateURL in lib.updateURLS) {
@@ -119,7 +118,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					}
 				}
 				if (url_in_updateURLS) {
-					alert(`更新源:${url_in_updateURLS}\n网络请求目标：${url.replace(lib.updateURL + '/master/', '')}\n${error instanceof window.ProgressEvent ? '' : ('状态消息或状态码：' + error + '\n')}提示:${message}`);
+					alert(`更新源:${url_in_updateURLS}\n网络请求目标：${url.replace(lib.updateURL + '/', '')}\n${error instanceof window.ProgressEvent ? '' : ('状态消息或状态码：' + error + '\n')}提示:${message}`);
 				} else {
 					alert(`网络请求目标：${url}\n${error instanceof window.ProgressEvent ? '' : ('状态消息或状态码：' + error + '\n')}提示:${message}`);
 				}
@@ -396,9 +395,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		precontent: function () {
 			// 添加两个更新地址
 			Object.assign(lib.updateURLS, {
-				fastgit: 'https://raw.fastgit.org/libccy/noname',
-				xuanwu: 'https://kuangthree.coding.net/p/nonamexwjh/d/nonamexwjh/git/raw',
-				URC: 'http://123.56.240.30/libccy/noname',
+				fastgit: 'https://raw.fastgit.org/Show-K/noname/super-smash-tabletop',
 			});
 
 			// 初始化，更新地址修改为URC
@@ -429,9 +426,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					item: {
 						coding: 'Coding',
 						github: 'GitHub',
-						fastgit: 'GitHub镜像',
-						xuanwu: '玄武镜像',
-						URC: 'URC'
+						fastgit: 'GitHub镜像'
 					},
 					onclick: function (item) {
 						if (lib.updateURLS[item]) {
@@ -450,9 +445,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			game.getFastestUpdateURL = function (updateURLS = lib.updateURLS, translate = {
 				coding: 'Coding',
 				github: 'GitHub',
-				fastgit: 'GitHub镜像',
-				xuanwu: '玄武镜像',
-				URC: 'URC'
+				fastgit: 'GitHub镜像'
 			}) {
 				if (typeof updateURLS != 'object') throw new TypeError('updateURLS must be an object type');
 				if (typeof translate != 'object') throw new TypeError('translate must be an object type');
@@ -462,7 +455,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					const url = updateURLS[key];
 					const start = new Date().getTime();
 					promises.push(
-						myFetch(`${url}/master/game/update.js`)
+						myFetch(`${url}/game/update.js`)
 							.then(async response => {
 								try {
 									await response.text();
@@ -554,7 +547,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				game.saveConfigValue('extension_在线更新_brokenFile');
 
 				if (url.indexOf('http') != 0) {
-					url = lib.updateURL + '/master/' + url;
+					url = lib.updateURL + '/' + url;
 				}
 
 				/**
@@ -563,7 +556,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				 * @param { boolean } [skipDownload] 是否跳过下载
 				 */
 				function success(FileEntry, skipDownload) {
-					if (FileEntry && !skipDownload && ['config', 'xuanwu'].includes(lib.config.update_link)) {
+					if (FileEntry && !skipDownload && ['config'].includes(lib.config.update_link)) {
 						FileEntry.file(file => {
 							const fileReader = new FileReader();
 							fileReader.onload = e => {
@@ -883,7 +876,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				/** 获取noname_update */
 				function getNonameUpdate() {
 					/** 更新源地址 */
-					const updateURL = lib.updateURL + '/master/';
+					const updateURL = lib.updateURL + '/';
 					if (typeof window.noname_update == 'object') {
 						return Promise.resolve(window.noname_update);
 					} else {
@@ -917,7 +910,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				/** 获取noname_source_list */
 				function getSourceList() {
 					/** 更新源地址 */
-					const updateURL = lib.updateURL + '/master/';
+					const updateURL = lib.updateURL + '/';
 					if (typeof window.noname_source_list == 'object') {
 						return Promise.resolve(window.noname_source_list);
 					} else {
@@ -988,7 +981,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				/** 获取noname_asset_list */
 				function getNonameAssets() {
 					/** 更新源地址 */
-					const updateURL = lib.updateURL + '/master/';
+					const updateURL = lib.updateURL + '/';
 					if (typeof window.noname_asset_list == 'object') {
 						return Promise.resolve(window.noname_asset_list);
 					} else {
@@ -1075,7 +1068,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			show_version: {
 				clear: true,
 				nopointer: true,
-				name: '扩展版本： v1.42',
+				name: '扩展版本： v1.42SST',
 			},
 			update_link_explain: {
 				clear: true,
@@ -1086,15 +1079,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					无: '无',
 					coding: 'Coding',
 					github: 'GitHub',
-					fastgit: 'GitHub镜像',
-					xuanwu: '玄武镜像',
-					URC: 'URC',
+					fastgit: 'GitHub镜像'
 				},
 				onclick: function (item) {
 					let str;
 					switch (item) {
 						case 'coding':
-							str = '目前最主要的更新源，但也是崩的最彻底的一个';
+							str = '已替换为URC（由Show-K大佬提供，名字取自United Rhythmized Club）';
 							break;
 						case 'github':
 							str = '国外的更新源，没有vpn或修改host设置的情况下几乎连不上此更新源';
@@ -1102,11 +1093,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						case 'fastgit':
 							str = 'github的镜像网址，拥有在国内访问的能力，但是偶尔会很卡，推荐使用此更新源';
 							break;
-						case 'xuanwu':
-							str = '由寰宇星城创建的更新源，和coding差不多，版本的更新需要他在苏婆更新后手动拉代码到服务器上';
-							break;
-						case 'URC':
-							str = '由Show-K大佬提供，名字取自United Rhythmized Club';
 					}
 					typeof str != 'undefined' && alert(str);
 					return false;
@@ -1129,9 +1115,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				item: {
 					coding: 'Coding',
 					github: 'GitHub',
-					fastgit: 'GitHub镜像',
-					xuanwu: '玄武镜像',
-					URC: 'URC'
+					fastgit: 'GitHub镜像'
 				},
 				onclick: function (item) {
 					if (item != game.getExtensionConfig('在线更新', 'update_link')) {
@@ -1858,9 +1842,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				nopointer: true,
 				name: `</br>
 					最新完整包下载地址1：
-					<a target='_self' href='https://hub.fastgit.org/libccy/noname/archive/refs/heads/master.zip'><span style='text-decoration: underline;'>点击下载</span></a></br>
+					<a target='_self' href='https://hub.fastgit.org/Show-K/noname/archive/refs/heads/super-smash-tabletop.zip'><span style='text-decoration: underline;'>点击下载</span></a></br>
 					最新完整包下载地址2：
-					<a target='_self' href='https://hub.fastgit.xyz/libccy/noname/archive/refs/heads/master.zip'><span style='text-decoration: underline;'>点击下载</span></a>
+					<a target='_self' href='https://hub.fastgit.xyz/Show-K/noname/archive/refs/heads/super-smash-tabletop.zip'><span style='text-decoration: underline;'>点击下载</span></a>
 					</br>
 				`,
 			}
@@ -1876,7 +1860,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.42",
+			version: "1.42SST",
 		},
 		files: { "character": [], "card": [], "skill": [] }
 	}

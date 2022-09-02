@@ -754,7 +754,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺(Show-K修改)",
 			diskURL: "",
 			forumURL: "",
-			version: "1.292",
+			version: "1.292SST",
 		}
 	};
 });
