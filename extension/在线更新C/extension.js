@@ -4,7 +4,7 @@
 "use strict";
 game.import("extension", function(lib, game, ui, get, ai, _status) {
 	if (game.getExtensionConfig('概念武将', 'enable') || game.getExtensionConfig('假装无敌', 'enable')) {
-		alert('【在线更新】扩展提示您：\r\n为避免额外的bug，本扩展不与【概念武将】和【假装无敌】扩展兼容');
+		alert('【在线更新C】扩展提示您：\r\n为避免额外的bug，本扩展不与【概念武将】和【假装无敌】扩展兼容');
 		throw new Error('为避免额外的bug，本扩展不与【概念武将】和【假装无敌】扩展兼容');
 	}
 
@@ -30,10 +30,10 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 		});
 	}
 
-	if (!Array.isArray(lib.config.extension_在线更新_brokenFile)) {
-		game.saveExtensionConfig('在线更新', 'brokenFile', []);
+	if (!Array.isArray(lib.config.extension_在线更新C_brokenFile)) {
+		game.saveExtensionConfig('在线更新C', 'brokenFile', []);
 	} else {
-		game.saveExtensionConfig('在线更新', 'brokenFile', Array.from(new Set([...lib.config.extension_在线更新_brokenFile])));
+		game.saveExtensionConfig('在线更新C', 'brokenFile', Array.from(new Set([...lib.config.extension_在线更新C_brokenFile])));
 	}
 
 	// 简单绑定一下游戏自带的更新选项和本扩展的更新选项
@@ -45,7 +45,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 	 */
     const assetConfigFun = function (configName) {
         return function(bool) {
-            game.saveExtensionConfig('在线更新', configName, bool);
+            game.saveExtensionConfig('在线更新C', configName, bool);
             const div = assetConfigDiv[configName];
             const bindTarget = assetConfigDiv[configName + '_bindTarget'];
             if (this && this._link) {
@@ -175,7 +175,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 	 * @param { fetchOptions } options 配置
 	 * @returns { Promise<myResponse> }
 	 */
-	const myFetch = function (url, options = { timeout: game.getExtensionConfig('在线更新', 'timeout') || 3000 }) {
+	const myFetch = function (url, options = { timeout: game.getExtensionConfig('在线更新C', 'timeout') || 3000 }) {
 		return new Promise(resolve => {
 			const xhr = new XMLHttpRequest();
 			xhr.timeout = options.timeout;
@@ -217,13 +217,13 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 	};
 	
 	return {
-		name: "在线更新",
+		name: "在线更新C",
 		editable: false,
 		content: function (config, pack) {
 			lib.arenaReady.push(() => {
 				if (typeof game.writeFile != 'function') {
-					alert('【在线更新】扩展不能导入在不能写入文件的大乱桌斗');
-					throw new Error('【在线更新】扩展不能导入在不能写入文件的大乱桌斗');
+					alert('【在线更新C】扩展不能导入在不能写入文件的大乱桌斗');
+					throw new Error('【在线更新C】扩展不能导入在不能写入文件的大乱桌斗');
 				}
 			});
 
@@ -263,7 +263,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						assetUpdateButton
 					});
 					clearInterval(interval);
-					return alert('【在线更新】扩展提示您：\r\n获取按钮异常,覆盖游戏更新操作失败');
+					return alert('【在线更新C】扩展提示您：\r\n获取按钮异常,覆盖游戏更新操作失败');
 				}
 
 				if (
@@ -280,7 +280,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						assetUpdateButton
 					});
 					clearInterval(interval);
-					return alert('【在线更新】扩展提示您：\r\n获取按钮异常,覆盖游戏更新操作失败');
+					return alert('【在线更新C】扩展提示您：\r\n获取按钮异常,覆盖游戏更新操作失败');
 				}
 
 				// 插入一条修改说明
@@ -288,11 +288,11 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				/** @type HTMLUListElement  */
 				// @ts-ignore
 				const insertLi = ul.insertBefore(document.createElement('li'), ul.firstElementChild);
-				insertLi.innerHTML = "<span class='bluetext'>更新功能已由【在线更新】扩展覆盖</span></br>";
+				insertLi.innerHTML = "<span class='bluetext'>更新功能已由【在线更新C】扩展覆盖</span></br>";
 				// a标签跳转到扩展界面
 				const jumpToExt = document.createElement('a');
 				jumpToExt.href = "javascript:void(0)";
-				jumpToExt.onclick = () => ui.click.extensionTab('在线更新');
+				jumpToExt.onclick = () => ui.click.extensionTab('在线更新C');
 
 				HTMLDivElement.prototype.css.call(jumpToExt, {
 					color: 'white',
@@ -314,7 +314,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				 */
 				const addChangeEvt = function (item, configName) {
 					assetConfigDiv[configName + '_bindTarget'] = item;
-					item.checked = game.getExtensionConfig('在线更新', configName);
+					item.checked = game.getExtensionConfig('在线更新C', configName);
 					item.onchange = () => {
 						game.saveConfig(configName, item.checked);
 						assetConfigFun[configName] && assetConfigFun[configName].onclick(item.checked);
@@ -345,7 +345,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				});
 
 				clearInterval(interval);
-				console.log("【在线更新】扩展已修改更新界面");
+				console.log("【在线更新C】扩展已修改更新界面");
 			}, 500);
 		},
 		precontent: function () {
@@ -355,9 +355,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			});
 
 			// 初始化，更新地址修改回coding
-			if (!game.getExtensionConfig('在线更新', 'update_link')) {
+			if (!game.getExtensionConfig('在线更新C', 'update_link')) {
 				game.saveConfig('update_link', 'coding');
-				game.saveExtensionConfig('在线更新', 'update_link', 'coding');
+				game.saveExtensionConfig('在线更新C', 'update_link', 'coding');
 				lib.updateURL = lib.updateURLS['coding'];
 			}
 
@@ -374,7 +374,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 							}
 						}
 						game.saveConfig('update_link', 'coding');
-						game.saveExtensionConfig('在线更新', 'update_link', 'coding');
+						game.saveExtensionConfig('在线更新C', 'update_link', 'coding');
 						lib.updateURL = lib.updateURLS.coding;
 						return 'coding';
 					})(),
@@ -385,7 +385,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					},
 					onclick: function (item) {
 						game.saveConfig('update_link', item);
-						game.saveExtensionConfig('在线更新', 'update_link', item);
+						game.saveExtensionConfig('在线更新C', 'update_link', item);
 						lib.updateURL = lib.updateURLS[item] || lib.updateURLS.coding;
 					},
 				};
@@ -492,16 +492,16 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					name = url.slice(url.lastIndexOf('/') + 1);
 				}
 
-				lib.config.extension_在线更新_brokenFile.add(url);
-				game.saveConfigValue('extension_在线更新_brokenFile');
+				lib.config.extension_在线更新C_brokenFile.add(url);
+				game.saveConfigValue('extension_在线更新C_brokenFile');
 
 				if (url.indexOf('http') != 0) {
 					url = lib.updateURL + '/' + url;
 				}
 
 				function success() {
-					lib.config.extension_在线更新_brokenFile.remove(downloadUrl);
-					game.saveConfigValue('extension_在线更新_brokenFile');
+					lib.config.extension_在线更新C_brokenFile.remove(downloadUrl);
+					game.saveConfigValue('extension_在线更新C_brokenFile');
 					if (typeof onsuccess == 'function') {
 						onsuccess();
 					}
@@ -539,8 +539,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 									if (stat.isDirectory()) {
 										console.error(`${path + '/' + name}是个文件夹`);
 										alert(`${path + '/' + name}是个文件夹，不予下载。请将此问题报告给此更新源的管理员。`);
-										lib.config.extension_在线更新_brokenFile.remove(path + '/' + name);
-										game.saveConfigValue('extension_在线更新_brokenFile');
+										lib.config.extension_在线更新C_brokenFile.remove(path + '/' + name);
+										game.saveConfigValue('extension_在线更新C_brokenFile');
 										return error(path + '/' + name, 'isDirectory');
 									}
 								}
@@ -586,8 +586,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 							case 404:
 								game.print(`更新源中${current}文件不存在，不需要重新下载`);
 								console.log(`更新源中${current}不存在，不需要重新下载`);
-								lib.config.extension_在线更新_brokenFile.remove(current);
-								game.saveConfigValue('extension_在线更新_brokenFile');
+								lib.config.extension_在线更新C_brokenFile.remove(current);
+								game.saveConfigValue('extension_在线更新C_brokenFile');
 								return onsuccess(current, true);
 							case 429:
 								game.print("当前请求太多，稍后重新下载");
@@ -625,8 +625,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 							// @ts-ignore
 						} else if (e.http_status == 404 || e.http_status == '404') {
 							console.log('指定网址中没有这个文件: ' + current);
-							lib.config.extension_在线更新_brokenFile.remove(current);
-							game.saveConfigValue('extension_在线更新_brokenFile');
+							lib.config.extension_在线更新C_brokenFile.remove(current);
+							game.saveConfigValue('extension_在线更新C_brokenFile');
 							return onsuccess(current, true);
 						} else {
 							game.print(e);
@@ -754,7 +754,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				get() {
 					return function () {
 						ui.menuContainer.show();
-						ui.click.extensionTab('在线更新');
+						ui.click.extensionTab('在线更新C');
 						/** @type { HTMLButtonElement[] } */
 						// @ts-ignore
 						const buttonList = ui.menuContainer.querySelectorAll('.config>span>button');
@@ -764,7 +764,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 							updateButton.click();
 							assetUpdateButton.click();
 						} else {
-							alert('【在线更新】扩展提示您：\r\n未找到本扩展的更新按钮,自动检查更新失败');
+							alert('【在线更新C】扩展提示您：\r\n未找到本扩展的更新按钮,自动检查更新失败');
 						}
 					}
 				},
@@ -772,9 +772,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			});
 
 			// 如果有没下载完就重启的文件
-			let brokenFileArr = lib.config.extension_在线更新_brokenFile;
+			let brokenFileArr = lib.config.extension_在线更新C_brokenFile;
 			window.addEventListener('beforeunload', () => {
-				game.saveExtensionConfig('在线更新', 'brokenFile', [...new Set(brokenFileArr)]);
+				game.saveExtensionConfig('在线更新C', 'brokenFile', [...new Set(brokenFileArr)]);
 			});
 			if (brokenFileArr && brokenFileArr.length) {
 				if (confirm(`检测到有未下载成功的文件(${brokenFileArr})，是否进行重新下载?`)) {
@@ -792,9 +792,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						progress.setFileName(copyList[index]);
 
 						brokenFileArr.remove(current);
-						game.saveExtensionConfig('在线更新', 'brokenFile', brokenFileArr);
-						lib.config.extension_在线更新_brokenFile.remove(current);
-						game.saveConfigValue('extension_在线更新_brokenFile');
+						game.saveExtensionConfig('在线更新C', 'brokenFile', brokenFileArr);
+						lib.config.extension_在线更新C_brokenFile.remove(current);
+						game.saveConfigValue('extension_在线更新C_brokenFile');
 						if (bool) {
 							console.error(`${current}不存在，不需要下载`);
 						} else {
@@ -816,7 +816,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 							}, 100);
 						}, 200);
 					}, (current, loaded, total) => {
-						if (!game.getExtensionConfig('在线更新', 'logProgress')) return false;
+						if (!game.getExtensionConfig('在线更新C', 'logProgress')) return false;
 						if (total != 0) {
 							progress.setFileName(`${current}(已完成${Math.round((loaded / total) * 100)}%)`);
 						} else {
@@ -825,8 +825,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					});
 				} else {
 					console.log('不进行重新下载，已清空失败列表');
-					lib.config.extension_在线更新_brokenFile = [];
-					game.saveConfigValue('extension_在线更新_brokenFile');
+					lib.config.extension_在线更新C_brokenFile = [];
+					game.saveConfigValue('extension_在线更新C_brokenFile');
 				}
 			}
 		},
@@ -874,7 +874,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						}
 					}
 					game.saveConfig('update_link', 'coding');
-					game.saveExtensionConfig('在线更新', 'update_link', 'coding');
+					game.saveExtensionConfig('在线更新C', 'update_link', 'coding');
 					lib.updateURL = lib.updateURLS.coding;
 					return 'coding';
 				})(),
@@ -884,10 +884,10 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					fastgit: 'GitHub镜像'
 				},
 				onclick: function (item) {
-					if (item != game.getExtensionConfig('在线更新', 'update_link')) {
+					if (item != game.getExtensionConfig('在线更新C', 'update_link')) {
 						delete window.noname_update;
 						game.saveConfig('update_link', item);
-						game.saveExtensionConfig('在线更新', 'update_link', item);
+						game.saveExtensionConfig('在线更新C', 'update_link', item);
 						lib.updateURL = lib.updateURLS[item] || lib.updateURLS.coding;
 					}
 				},
@@ -930,7 +930,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						target.innerText = '300';
 						time = 300;
 					}
-					game.saveExtensionConfig('在线更新', 'timeout', time);
+					game.saveExtensionConfig('在线更新C', 'timeout', time);
 				},
 			},
 			logProgress: {
@@ -938,7 +938,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				intro: '下载文件时显示的进度条是否实时显示每个文件的下载进度',
 				name: '显示每个文件的下载进度',
 				onclick: function (bool) {
-					game.saveExtensionConfig('在线更新', 'logProgress', bool);
+					game.saveExtensionConfig('在线更新C', 'logProgress', bool);
 				}
 			},
 			auto_check_update: {
@@ -948,7 +948,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				intro: '每次开启游戏后，自动跳转到本扩展页面检测更新',
 				name: '每次启动自动检测更新',
 				onclick: function (bool) {
-					game.saveExtensionConfig('在线更新', 'auto_check_update', bool);
+					game.saveExtensionConfig('在线更新C', 'auto_check_update', bool);
 					game.saveConfig('auto_check_update', bool);
 				}
 			},
@@ -1065,7 +1065,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 										let updates = window.noname_source_list;
 										delete window.noname_source_list;
 
-										if (!game.getExtensionConfig('在线更新', 'updateAll') && Array.isArray(files)) {
+										if (!game.getExtensionConfig('在线更新C', 'updateAll') && Array.isArray(files)) {
 											files.add('game/update.js');
 											let files2 = [];
 											for (let i = 0; i < files.length; i++) {
@@ -1168,7 +1168,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 												}, 750);
 											}, 250);
 										}, (current, loaded, total) => {
-											if (!game.getExtensionConfig('在线更新', 'logProgress')) return false;
+											if (!game.getExtensionConfig('在线更新C', 'logProgress')) return false;
 											if (total != 0) {
 												progress.setFileName(`${current}(已完成${Math.round((loaded / total) * 100)}%)`);
 											} else {
@@ -1275,7 +1275,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				intro: '更新游戏时，下载所有主要文件（不包括素材），如果你自行修改了大乱桌斗本体的theme等文件夹下的素材，建议不要开启此选项',
 				name: '强制更新所有主文件',
 				onclick: (bool) => {
-					game.saveExtensionConfig('在线更新', 'updateAll', bool);
+					game.saveExtensionConfig('在线更新C', 'updateAll', bool);
 				}
 			},
 			checkForAssetUpdate: {
@@ -1360,7 +1360,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 								let skipcharacter = []
 								let skipcard = []; //['tiesuo_mark'];
 								//如果没选择【检查图片素材】（全部）
-								if (!game.getExtensionConfig('在线更新', 'assetImageFull')) {
+								if (!game.getExtensionConfig('在线更新C', 'assetImageFull')) {
 									for (let i = 0; i < lib.config.all.sgscharacters.length; i++) {
 										let pack = lib.characterPack[lib.config.all.sgscharacters[i]];
 										for (let j in pack) {
@@ -1379,9 +1379,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 									switch (updates[i].slice(0, 5)) {
 										case 'image':
 											//如果没选择检查图片更新（全部）
-											if (!game.getExtensionConfig('在线更新', 'assetImageFull')) {
+											if (!game.getExtensionConfig('在线更新C', 'assetImageFull')) {
 												//如果没选择检查图片更新（部分）
-												if (!game.getExtensionConfig('在线更新', 'assetImage')) {
+												if (!game.getExtensionConfig('在线更新C', 'assetImage')) {
 													//跳过
 													updates.splice(i--, 1);
 												} else {
@@ -1401,20 +1401,20 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 											}
 											break;
 										case 'audio':
-											if (!game.getExtensionConfig('在线更新', 'assetAudio')) {
+											if (!game.getExtensionConfig('在线更新C', 'assetAudio')) {
 												updates.splice(i--, 1);
 											}
 											break;
 
 										case 'font/':
-											if (!game.getExtensionConfig('在线更新', 'assetFont')) {
+											if (!game.getExtensionConfig('在线更新C', 'assetFont')) {
 												updates.splice(i--, 1);
 											}
 
 									}
 								}
 
-								if (game.getExtensionConfig('在线更新', 'assetSkin')) {
+								if (game.getExtensionConfig('在线更新C', 'assetSkin')) {
 									//如果更新素材
 									for (let i in skins) {
 										for (let j = 1; j <= skins[i]; j++) {
@@ -1503,7 +1503,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 											}, 750);
 										}, 250);
 									}, (current, loaded, total) => {
-										if (!game.getExtensionConfig('在线更新', 'logProgress')) return false;
+										if (!game.getExtensionConfig('在线更新C', 'logProgress')) return false;
 										if (total != 0) {
 											progress.setFileName(`${current}(已完成${Math.round((loaded / total) * 100)}%)`);
 										} else {
@@ -1624,11 +1624,11 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			intro: `
 				<span style='font-weight: bold;'>※本扩展不与【概念武将】和【假装无敌】扩展兼容</span></br>
 				安装本扩展后会自动覆盖【自动检测更新】的功能，不论扩展是否开启</br>
-				点击按钮即可在线更新，文件下载失败会自动重新下载。目前已经覆盖了游戏自带的更新按钮</br>
+				点击按钮即可在线更新C，文件下载失败会自动重新下载。目前已经覆盖了游戏自带的更新按钮</br>
 				<span style='color:red'>※请不要在更新时关闭游戏或主动断网，否则后果自负</span></br>
 			`,
 			author: "诗笺(Show-K修改)",
-			version: "1.34SST",
+			version: "1.34CSST",
 		},
 	}
 });
