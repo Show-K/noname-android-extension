@@ -851,7 +851,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					let str;
 					switch (item) {
 						case 'coding':
-							str = '目前最主要的更新源，但是这个免费的服务器很容易崩溃，最好不要在版本刚发布时使用此更新源';
+							str = '已替换为URC（由Show-K大佬提供，名字取自United Rhythmized Club）';
 							break;
 						case 'github':
 							str = '国外的更新源，没有vpn或修改host设置的情况下几乎连不上此更新源';
