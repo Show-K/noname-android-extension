@@ -1,6 +1,6 @@
 window['noname_android_extension'] = {
 	"在线更新": {
-		"version": "1.42SST",
+		"version": "1.43SST",
 		"author": "诗笺(Show-K修改)",
 		"intro": "用于更新无名杀版本，<span style=\"color: red;\">基本实现0崩溃</span>。",
 		"files": [
@@ -8,17 +8,18 @@ window['noname_android_extension'] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "68.12KB"
+		"size": "66.36KB"
 	},
 	"在线更新C": {
 		"version": "1.34CSST",
 		"author": "诗笺(Show-K修改)",
 		"intro": "（兼容版）用于更新无名杀版本，<span style=\"color: red;\">基本实现0崩溃</span>。",
 		"files": [
+			"extension/在线更新C/extension.css",
 			"extension/在线更新C/extension.js",
 			"extension/在线更新C/typings/index.d.ts"
 		],
-		"size": "59.40KB"
+		"size": "59.73KB"
 	},
 	"SJ Settings": {
 		"version": "1.292SST",
