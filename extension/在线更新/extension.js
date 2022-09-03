@@ -134,7 +134,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		}
 
 		if (++game.updateErrors > 5) {
-			alert('检测到获取更新失败次数过多，建议您更换无名杀的更新源');
+			alert('检测到获取更新失败次数过多，建议您更换大乱桌斗的更新源');
 			game.updateErrors = 0;
 		}
 	};
@@ -150,7 +150,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			window.removeEventListener('beforeunload', window.saveBrokenFile);
 		},
 		content: function (config, pack) {
-			// 替换无名杀自带的更新功能
+			// 替换大乱桌斗自带的更新功能
 			// 取消复选框和扩展的绑定
 			const { checkForUpdate, checkForAssetUpdate } = this[4].code.config;
 
@@ -1055,7 +1055,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			Object.defineProperty(game, 'checkForUpdate', {
 				get() {
 					return function () {
-						alert('无名杀自带的自动检查更新已禁用，请使用在线更新扩展内的自动检查更新功能');
+						alert('大乱桌斗自带的自动检查更新已禁用，请使用在线更新扩展内的自动检查更新功能');
 						game.saveConfig('auto_check_update', false);
 					};
 				},
@@ -1188,7 +1188,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				init: (() => {
 					return lib.config['auto_check_update'] == true;
 				})(),
-				intro: '每次开启游戏后，每10分钟检查无名杀是否有更新',
+				intro: '每次开启游戏后，每10分钟检查大乱桌斗是否有更新',
 				name: '每10分钟自动检测更新',
 				onclick: function (bool) {
 					game.saveExtensionConfig('在线更新', 'auto_check_update', bool);
@@ -1382,7 +1382,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 												cordova.plugins.notification.local.schedule({
 													id: 4,
 													title: '游戏版本更新',
-													text: `游戏版本更新完啦，点击进入无名杀`,
+													text: `游戏版本更新完啦，点击进入大乱桌斗`,
 												});
 											}
 										}
@@ -1486,7 +1486,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			},
 			updateAll: {
 				init: false,
-				intro: '更新游戏时，下载所有主要文件（不包括素材），如果你自行修改了无名杀本体的theme等文件夹下的素材，建议不要开启此选项',
+				intro: '更新游戏时，下载所有主要文件（不包括素材），如果你自行修改了大乱桌斗本体的theme等文件夹下的素材，建议不要开启此选项',
 				name: '强制更新所有主文件',
 				/*onclick: (bool) => {
 					game.saveExtensionConfig('在线更新', 'updateAll', bool);
@@ -1704,7 +1704,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 											cordova.plugins.notification.local.schedule({
 												id: 5,
 												title: '游戏素材更新',
-												text: `游戏素材更新完啦，点击进入无名杀`,
+												text: `游戏素材更新完啦，点击进入大乱桌斗`,
 											});
 										}
 									}
