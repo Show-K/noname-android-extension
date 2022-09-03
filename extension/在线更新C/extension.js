@@ -2,7 +2,7 @@
 /// <reference path="../../typings/index.d.ts" />
 // @ts-check
 "use strict";
-game.import("extension", function(lib, game, ui, get, ai, _status) {
+game.import("extension", function (lib, game, ui, get, ai, _status) {
 	if (game.getExtensionConfig('概念武将', 'enable') || game.getExtensionConfig('假装无敌', 'enable')) {
 		alert('【在线更新C】扩展提示您：\r\n为避免额外的bug，本扩展不与【概念武将】和【假装无敌】扩展兼容');
 		throw new Error('为避免额外的bug，本扩展不与【概念武将】和【假装无敌】扩展兼容');
@@ -37,25 +37,25 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 	}
 
 	// 简单绑定一下游戏自带的更新选项和本扩展的更新选项
-    const assetConfigDiv = {};
+	const assetConfigDiv = {};
 	/**
 	 * 
 	 * @param { string } configName 配置名
 	 * @returns { (bool: boolean) => void }
 	 */
-    const assetConfigFun = function (configName) {
-        return function(bool) {
-            game.saveExtensionConfig('在线更新C', configName, bool);
-            const div = assetConfigDiv[configName];
-            const bindTarget = assetConfigDiv[configName + '_bindTarget'];
-            if (this && this._link) {
-                !div && (assetConfigDiv[configName] = this);
-                bindTarget && (bindTarget.checked = bool);
-            } else if (div) {
-                div.classList.toggle('on', bool);
-            }
-        }
-    };
+	const assetConfigFun = function (configName) {
+		return function (bool) {
+			game.saveExtensionConfig('在线更新C', configName, bool);
+			const div = assetConfigDiv[configName];
+			const bindTarget = assetConfigDiv[configName + '_bindTarget'];
+			if (this && this._link) {
+				!div && (assetConfigDiv[configName] = this);
+				bindTarget && (bindTarget.checked = bool);
+			} else if (div) {
+				div.classList.toggle('on', bool);
+			}
+		}
+	};
 
 	/**
 	 * @description 请求错误处理
@@ -215,7 +215,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 		}
 		return size;
 	};
-	
+
 	return {
 		name: "在线更新C",
 		editable: false,
@@ -829,6 +829,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					game.saveConfigValue('extension_在线更新C_brokenFile');
 				}
 			}
+
+			lib.init.css(lib.assetURL + 'extension/在线更新C', 'extension');
 		},
 		config: {
 			show_version: {

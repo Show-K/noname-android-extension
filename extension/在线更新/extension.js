@@ -30,7 +30,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			}
 
 			fetch(url, { signal }).then(response => {
-				if (response.status != 200 || !response.ok) {
+				if (!response.ok) {
 					return reject(response);
 				}
 				resolve(response);
@@ -97,7 +97,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 	/**
 	 * @description 请求错误处理
-	 * @param { { url: string, error: number | Error, message: string } | Error } err 
+	 * @param { { url: string, error: number | Error, message: string } | Error | String } err 
 	 */
 	const response_catch = err => {
 		console.error(err);
@@ -123,14 +123,14 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					alert(`网络请求目标：${url}\n${error instanceof window.ProgressEvent ? '' : ('状态消息或状态码：' + error + '\n')}提示:${message}`);
 				}
 			}
-		} else {
+		} else if (err instanceof Error) {
 			if (err.name === 'AbortError') {
 				alert('网络连接超时');
 			} else if (err.message == 'Failed to fetch') {
 				alert('网络请求失败');
-			} else {
-				// alert(err.message || err);
 			}
+		} else if (typeof err == 'string') {
+			alert(err);
 		}
 
 		if (++game.updateErrors > 5) {
@@ -389,7 +389,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					}).catch(console.error);
 				}
 				setInterval(checkUpdate, 1000 * 60 * 10);
-				checkUpdate();
+				setTimeout(checkUpdate, 1000);
 			}
 		},
 		precontent: function () {
@@ -432,9 +432,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						if (lib.updateURLS[item]) {
 							game.saveConfig('update_link', item);
 							game.saveExtensionConfig('在线更新', 'update_link', item);
-							lib.updateURL = lib.updateURLS.coding;
+							lib.updateURL = lib.updateURLS[item];
 						} else {
-							alert(`选择的更新源(${ item })不存在`);
+							alert(`选择的更新源(${item})不存在`);
 							return false;
 						}
 					},
@@ -614,8 +614,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							target: e.target,
 							error: errorCode[e.code]
 						});
-						switch(e.http_status) {
-							case 404: 
+						switch (e.http_status) {
+							case 404:
 								game.print(`更新源中不存在${path}/${name}`);
 								console.log(`更新源中不存在${path}/${name}`);
 								success(undefined, true);
@@ -625,7 +625,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									onerror(e, e.body);
 								}
 						}
-						
+
 					} else {
 						// 电脑端下载的错误
 						console.error(e, message);
@@ -705,7 +705,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 					fetch.then(response => response.arrayBuffer())
 						.then(arrayBuffer => {
-							console.log(arrayBuffer);
+							// console.log(arrayBuffer);
 							// 写入文件
 							// 先创建指定文件夹
 							game.ensureDirectory(path, () => {
@@ -733,8 +733,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						.catch(
 							/** @param { Response } response */
 							response => {
-							error(new Error(String(response.status)), response.statusText);
-						})
+								error(new Error(String(response.status)), response.statusText);
+							})
 				}
 			};
 
@@ -964,7 +964,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							}
 						}
 						if (i == 5) {
-							reject('达到最大重试次数');
+							reject('达到最大重试次数(5次), 请重试');
 						} else {
 							resolve({
 								// @ts-ignore
@@ -1034,7 +1034,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							}
 						}
 						if (i == 5) {
-							reject('达到最大重试次数');
+							reject('达到最大重试次数(5次), 请重试');
 						} else {
 							resolve({
 								// @ts-ignore
@@ -1059,7 +1059,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						game.saveConfig('auto_check_update', false);
 					};
 				},
-				set(v) {}
+				set(v) { }
 			});
 
 			lib.init.css(lib.assetURL + 'extension/在线更新', 'extension');
@@ -1068,7 +1068,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			show_version: {
 				clear: true,
 				nopointer: true,
-				name: '扩展版本： v1.42SST',
+				name: '扩展版本： v1.43SST',
 			},
 			update_link_explain: {
 				clear: true,
@@ -1371,7 +1371,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										});
 									}
 								},
-									e => {},
+									e => { },
 									() => {
 										// 更新进度, 下载完成时不执行onsuccess而是onfinish
 										progress.setProgressValue(copyList.length);
@@ -1860,7 +1860,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.42SST",
+			version: "1.43SST",
 		},
 		files: { "character": [], "card": [], "skill": [] }
 	}
