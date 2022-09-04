@@ -8,7 +8,7 @@ window['noname_android_extension'] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "66.36KB"
+		"size": "66.38KB"
 	},
 	"在线更新C": {
 		"version": "1.34CSST",
@@ -52,8 +52,8 @@ window['noname_android_extension'] = {
 		"size": "232.86KB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.9.115",
-		"version": "1.2.0.220114.11SST",
+		"nonameVersion": "1.9.115.1",
+		"version": "1.2.0.220114.12SST",
 		"author": "短歌(寰宇星城, Show-K代更)",
 		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
 		"files": [
@@ -435,6 +435,6 @@ window['noname_android_extension'] = {
 			"extension/十周年UI/image/decoration/name_unknown.png",
 			"extension/十周年UI/image/decoration/vs.png"
 		],
-		"size": "15.63MB"
+		"size": "15.64MB"
 	}
 };

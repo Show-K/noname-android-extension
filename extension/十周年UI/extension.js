@@ -546,6 +546,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							if (next.source == undefined && !next.nosource) next.source = _status.event.player;
 							if (next.ai == undefined) next.ai = get.unuseful2;
 							next.position = 'hs';
+							if (next.ai2 == undefined) next.ai2 = (() => 1);
 							next.setContent('chooseToRespond');
 							next._args = Array.from(arguments);
 							return next;
@@ -1595,9 +1596,30 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								var ok = game.check();
 								if (ok) {
 									ui.click.ok();
-								} else if (ai.basic.chooseCard(event.ai)) {
-									ui.click.ok();
-									event._aiexcludeclear = true;
+								} else if (ai.basic.chooseCard(event.ai1 || event.ai)) {
+									if (ai.basic.chooseTarget(event.ai2)) {
+										ui.click.ok();
+										event._aiexcludeclear = true;
+									} else {
+										if (!event.norestore) {
+											if (event.skill) {
+												var skill = event.skill;
+												ui.click.cancel();
+												event._aiexclude.add(skill);
+												var info = get.info(skill);
+												if (info.sourceSkill) {
+													event._aiexclude.add(info.sourceSkill);
+												}
+											} else {
+												get.card(true).aiexclude();
+												game.uncheck();
+											}
+											event.redo();
+											game.resume();
+										} else {
+											ui.click.cancel();
+										}
+									}
 								} else if (event.skill && !event.norestore) {
 									var skill = event.skill;
 									ui.click.cancel();
@@ -2248,19 +2270,21 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							} else if (event.source && (event.animate == 'give' || event.animate == 'giveAuto')) {
 								game.pause();
 								gainTo(cards);
+								var evtmap = event.relatedLose;
 								if (event.animate == 'give') {
-									event.source.$give(cards, player);
+									if (evtmap && evtmap.cards && evtmap.cards.length > 0) event.source.$give(evtmap.cards, player);
+									else event.source.$give(cards, player);
 								} else {
 									var c;
 									var hs = [];
 									var ots = [];
 									hs.duiMod = ots.duiMod = event.source;
-									for (var i = 0; i < cards.length; i++) {
-										c = cards[i];
-										if (event.relatedLose && event.relatedLose.hs && event.relatedLose.hs.contains(c))
-											hs.push(c);
-										else
-											ots.push(c);
+									if (evtmap && evtmap.hs && evtmap.cards) {
+										for (var i = 0; i < cards.length; i++) {
+											c = cards[i];
+											if (evtmap.hs.contains(c)) hs.push(c);
+											else if (evtmap.cards.contains(c)) ots.push(c);
+										}
 									}
 
 									if (hs.length)
@@ -7819,7 +7843,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						if (totalW > limitW) {
 							xMargin = csw - Math.abs(limitW - csw * cards.length) / (cards.length - 1);
 							if (lib.config.fold_card) {
-								var min = 27 * cs;
+								var foldCardMinWidth = lib.config['extension_十周年UI_foldCardMinWidth'];
+								var min = cs;
+								if (foldCardMinWidth == 'cardWidth') {
+									min *= cw;
+								} else {
+									min *= (foldCardMinWidth && foldCardMinWidth.length ? parseInt(foldCardMinWidth) : 81);
+								}
 								if (xMargin < min) {
 									expand = true;
 									xMargin = min;
@@ -9921,6 +9951,27 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			closeWhenChess: {
 				name: '战棋模式关闭UI',
 				init: false,
+			},
+			foldCardMinWidth: {
+				name: '折叠手牌最小宽度',
+				intro: '设置当手牌过多时，折叠手牌露出部分的最小宽度（默认为81）',
+				init: '81',
+				item: {
+					'9': '9',
+					'18': '18',
+					'27': '27',
+					'36': '36',
+					'45': '45',
+					'54': '54',
+					'63': '63',
+					'72': '72',
+					'81': '81',
+					'90': '90',
+					'cardWidth': '卡牌宽度'
+				},
+				update: function () {
+					if (window.decadeUI) decadeUI.layout.updateHand();
+				}
 			}
 		},
 		package: {
@@ -9946,12 +9997,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.11SST（Show-K修复版）',
-					'更新日期：2022-08-24',
-					'- 修复了减体力上限至负数会报错的异常。',
-					'- 修复了转换技标记在黄色/红色的人物标记样式下无法旋转的异常。',
-					'- 优化了图片标记的显示效果（举例：护甲）。',
-					'- 修复了古锭刀特效出现在武将牌下方的异常。',
+					'当前版本：1.2.0.220114.12SST（Show-K修复版）',
+					'更新日期：2022-09-03',
+					'- 现在可以设置折叠手牌最小宽度了，且默认值修改为81。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -9968,10 +10016,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 				return '<p style="color:rgb(210,210,000); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;">' + log.join('<br>') + '</p>';
 			})(),
-			author: "原作者：短歌 QQ464598631<br>修改者（未经允许）：Show-K",
+			author: "短歌 QQ464598631<br>(Show-K未经允许修改)",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.11SST",
+			version: "1.2.0.220114.12SST",
 		},
 		files: {
 			"character": [],
