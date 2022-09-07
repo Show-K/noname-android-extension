@@ -14,5 +14,5 @@ progress.zxgxProgress::-webkit-progress-bar {
 
 progress.zxgxProgress::-webkit-progress-value {
 	border-radius: 0.2rem;
-	background: rgb(0,117,255);
+	background: rgb(0, 117, 255);
 }
