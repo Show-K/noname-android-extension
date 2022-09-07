@@ -435,6 +435,6 @@ window['noname_android_extension'] = {
 			"extension/十周年UI/image/decoration/name_unknown.png",
 			"extension/十周年UI/image/decoration/vs.png"
 		],
-		"size": "15.64MB"
+		"size": "15.65MB"
 	}
 };

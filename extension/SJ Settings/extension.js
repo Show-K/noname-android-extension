@@ -19,7 +19,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		}
 	}
 	game.saveConfigValue('extensions');
-	
+
 	// 避免提示是否下载图片和字体素材
 	if (!lib.config.asset_version) {
 		game.saveConfig('asset_version', '无');
