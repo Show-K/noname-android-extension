@@ -1,9 +1,9 @@
 interface android_extension {
 	[key: string]: {
 		/** 扩展版本号 */
-		version: string, 
+		version: string,
 		/** 扩展文件数组 */
-		files: string[], 
+		files: string[],
 		/** 扩展作者 */
 		author: string,
 		/** 扩展大小(未压缩) */
