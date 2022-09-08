@@ -8,7 +8,7 @@ window['noname_android_extension'] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "66.17KB"
+		"size": "66.16KB"
 	},
 	"在线更新C": {
 		"version": "1.34CSST",

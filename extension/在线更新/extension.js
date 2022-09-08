@@ -39,15 +39,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 	};
 
 	/**
-	 * 判断是否能进行更新(即是否能连接上百度)
+	 * 判断是否能进行更新(即是否能连接上必应)
 	 * @returns { Promise<number | void> }
 	 */
 	function canUpdate() {
 		return new Promise((resolve, reject) => {
-			myFetch("https://www.baidu.com").then(response => {
+			myFetch("https://www.bing.com").then(response => {
 				// 304: 自上次访问以来，请求的资源未被修改
 				if (response.status == 200 || response.status == 304) {
-					console.log('连接百度成功，状态码: ' + response.status);
+					console.log('连接必应成功，状态码: ' + response.status);
 					resolve();
 				} else {
 					reject(response.status);
