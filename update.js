@@ -10,17 +10,6 @@ window['noname_android_extension'] = {
 		],
 		"size": "66.42KB"
 	},
-	"在线更新C": {
-		"version": "1.34CSST",
-		"author": "诗笺(Show-K修改)",
-		"intro": "（兼容版）用于更新无名杀版本，<span style=\"color: red;\">基本实现0崩溃</span>。",
-		"files": [
-			"extension/在线更新C/extension.css",
-			"extension/在线更新C/extension.js",
-			"extension/在线更新C/typings/index.d.ts"
-		],
-		"size": "59.52KB"
-	},
 	"SJ Settings": {
 		"version": "1.292SST",
 		"author": "诗笺(Show-K修改)",
@@ -52,7 +41,7 @@ window['noname_android_extension'] = {
 		"size": "232.86KB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.9.115.1",
+		"nonameVersion": "1.9.115.2",
 		"version": "1.2.0.220114.12SST",
 		"author": "短歌(寰宇星城, Show-K代更)",
 		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
@@ -360,6 +349,7 @@ window['noname_android_extension'] = {
 			"extension/十周年UI/image/card/shuiyanqijuny.webp",
 			"extension/十周年UI/image/card/shunshou.webp",
 			"extension/十周年UI/image/card/sst_aegises.webp",
+			"extension/十周年UI/image/card/sst_ink.webp",
 			"extension/十周年UI/image/card/sst_spear_thrust.webp",
 			"extension/十周年UI/image/card/suijiyingbian.webp",
 			"extension/十周年UI/image/card/suolianjia.webp",
@@ -408,6 +398,9 @@ window['noname_android_extension'] = {
 			"extension/十周年UI/image/card/zhanxiang.webp",
 			"extension/十周年UI/image/card/zhaoshu.webp",
 			"extension/十周年UI/image/card/zheji.webp",
+			"extension/十周年UI/image/card/zhengsu_bianzhen.webp",
+			"extension/十周年UI/image/card/zhengsu_leijin.webp",
+			"extension/十周年UI/image/card/zhengsu_mingzhi.webp",
 			"extension/十周年UI/image/card/zhibi.webp",
 			"extension/十周年UI/image/card/zhuahuang.webp",
 			"extension/十周年UI/image/card/zhuge.webp",
@@ -435,6 +428,6 @@ window['noname_android_extension'] = {
 			"extension/十周年UI/image/decoration/name_unknown.png",
 			"extension/十周年UI/image/decoration/vs.png"
 		],
-		"size": "15.65MB"
+		"size": "15.68MB"
 	}
 };
