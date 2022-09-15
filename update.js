@@ -19,7 +19,7 @@ window['noname_android_extension'] = {
 			"extension/在线更新C/extension.js",
 			"extension/在线更新C/typings/index.d.ts"
 		],
-		"size": "59.51KB"
+		"size": "59.52KB"
 	},
 	"SJ Settings": {
 		"version": "1.292SST",
