@@ -44,7 +44,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 	 */
 	function canUpdate() {
 		return new Promise((resolve, reject) => {
-			myFetch("https://www.bing.com").then(response => {
+			myFetch(`https://www.bing.com?date=${(new Date()).getTime()}`).then(response => {
 				// 304: 自上次访问以来，请求的资源未被修改
 				if (response.status == 200 || response.status == 304) {
 					console.log('连接必应成功，状态码: ' + response.status);
@@ -455,7 +455,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					const url = updateURLS[key];
 					const start = new Date().getTime();
 					promises.push(
-						myFetch(`${url}/game/update.js`)
+						myFetch(`${url}/game/update.js?date=${(new Date()).getTime()}`)
 							.then(async response => {
 								try {
 									await response.text();
@@ -643,7 +643,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					// 判断是不是文件夹，不是才下载
 					function download() {
 						let fileTransfer = new FileTransfer();
-						fileTransfer.download(encodeURI(url), encodeURI(lib.assetURL + path + '/' + name), success, error);
+						fileTransfer.download(encodeURI(`${url}?date=${(new Date()).getTime()}`), encodeURI(lib.assetURL + path + '/' + name), success, error);
 					}
 					window.resolveLocalFileSystemURL(lib.assetURL,
 						/**
@@ -659,7 +659,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							}, download);
 						}, download);
 				} else {
-					const fetch = myFetch(url);
+					const fetch = myFetch(`${url}?date=${(new Date()).getTime()}`);
 
 					if (typeof onprogress == 'function') {
 						/** @type { number } 资源总长度 */
@@ -880,7 +880,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					if (typeof window.noname_update == 'object') {
 						return Promise.resolve(window.noname_update);
 					} else {
-						return myFetch(`${updateURL}game/update.js`)
+						return myFetch(`${updateURL}game/update.js?date=${(new Date()).getTime()}`)
 							.then(response => response.text())
 							.then(text => {
 								// 赋值window.noname_update
@@ -897,7 +897,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 								} catch (e) {
 									if (e && e.message && e.message.indexOf('in JSON at position') != -1) {
-										try { eval(text) } catch (error) {}
+										try { eval(text) } catch (error) { }
 										if (typeof window.noname_update != 'object') {
 											return Promise.reject('更新内容获取失败(game/update.js)，请重试');
 										}
@@ -914,7 +914,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					if (typeof window.noname_source_list == 'object') {
 						return Promise.resolve(window.noname_source_list);
 					} else {
-						return myFetch(`${updateURL}game/source.js`)
+						return myFetch(`${updateURL}game/source.js?date=${(new Date()).getTime()}`)
 							.then(response => response.text())
 							.then(text => {
 								//赋值window.noname_source_list
@@ -985,7 +985,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					if (typeof window.noname_asset_list == 'object') {
 						return Promise.resolve(window.noname_asset_list);
 					} else {
-						return myFetch(`${updateURL}game/asset.js`)
+						return myFetch(`${updateURL}game/asset.js?date=${(new Date()).getTime()}`)
 							.then(response => response.text())
 							.then(text => {
 								// 赋值window.noname_asset_list
