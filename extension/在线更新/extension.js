@@ -897,7 +897,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 								} catch (e) {
 									if (e && e.message && e.message.indexOf('in JSON at position') != -1) {
-										try { eval(text) } catch (error) { }
+										try { eval(text) } catch (error) {}
 										if (typeof window.noname_update != 'object') {
 											return Promise.reject('更新内容获取失败(game/update.js)，请重试');
 										}
@@ -1068,7 +1068,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			show_version: {
 				clear: true,
 				nopointer: true,
-				name: '扩展版本： v1.43SST',
+				name: '扩展版本： v1.44SST',
 			},
 			update_link_explain: {
 				clear: true,
@@ -1333,6 +1333,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								parentNode.insertBefore(span, parentNode.firstElementChild);
 
 								let consoleMenu;
+								// @ts-ignore
 								if (this != button) {
 									consoleMenu = document.createElement('button');
 									consoleMenu.setAttribute('type', 'button');
@@ -1860,7 +1861,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.43SST",
+			version: "1.44SST",
 		},
 		files: { "character": [], "card": [], "skill": [] }
 	}
