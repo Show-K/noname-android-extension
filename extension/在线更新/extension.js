@@ -294,7 +294,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						lib.config.extension_在线更新_brokenFile = [];
 						game.saveConfigValue('extension_在线更新_brokenFile');
 					}
-				}, window.inSplash ? 0 : 2500);
+				}, 2500);
 			}
 
 			// 切换回应用，清除app通知
@@ -312,88 +312,89 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			}
 
 			// 自动检测更新
-			if (game.getExtensionConfig('在线更新', 'auto_check_update')) {
-				function checkUpdate() {
-					game.shijianGetUpdateFiles().then(({ update }) => {
-						console.log('获取到更新', update);
-						if (update.version == lib.version) {
-							return;
+			function checkUpdate() {
+				game.shijianGetUpdateFiles().then(({ update }) => {
+					console.log('获取到更新', update);
+					if (update.version == lib.version) {
+						return;
+					} else {
+						/** 现有版本 */
+						let v1 = lib.version.split('.').map(item => Number(item) || 0);
+						/** 服务器版本 */
+						let v2 = update.version.split('.').map(item => Number(item) || 0);
+						for (let i = 0; i < v1.length && i < v2.length; i++) {
+							v1[i] = v1[i] || 0;
+							v2[i] = v2[i] || 0;
+							if (v2[i] > v1[i]) break;
+							// 游戏版本比服务器提供的版本还要高
+							if (v1[i] > v2[i]) {
+								return;
+							}
+						}
+					}
+
+					function goupdate() {
+						ui.menuContainer.show();
+						ui.click.extensionTab('在线更新');
+						/** @type { HTMLButtonElement[] } */
+						// @ts-ignore
+						const buttonList = ui.menuContainer.querySelectorAll('.config>span>button');
+						const updateButton = buttonList[0];
+						const assetUpdateButton = buttonList[1];
+						if (updateButton && assetUpdateButton) {
+							updateButton.click();
+							assetUpdateButton.click();
 						} else {
-							/** 现有版本 */
-							let v1 = lib.version.split('.').map(item => Number(item) || 0);
-							/** 服务器版本 */
-							let v2 = update.version.split('.').map(item => Number(item) || 0);
-							for (let i = 0; i < v1.length && i < v2.length; i++) {
-								v1[i] = v1[i] || 0;
-								v2[i] = v2[i] || 0;
-								if (v2[i] > v1[i]) break;
-								// 游戏版本比服务器提供的版本还要高
-								if (v1[i] > v2[i]) {
-									return;
-								}
-							}
+							alert('【在线更新】扩展提示您：\r\n未找到本扩展的更新按钮，请手动点击');
 						}
+					}
 
-						function goupdate() {
-							ui.menuContainer.show();
-							ui.click.extensionTab('在线更新');
-							/** @type { HTMLButtonElement[] } */
-							// @ts-ignore
-							const buttonList = ui.menuContainer.querySelectorAll('.config>span>button');
-							const updateButton = buttonList[0];
-							const assetUpdateButton = buttonList[1];
-							if (updateButton && assetUpdateButton) {
-								updateButton.click();
-								assetUpdateButton.click();
-							} else {
-								alert('【在线更新】扩展提示您：\r\n未找到本扩展的更新按钮，请手动点击');
-							}
-						}
+					// 获取到更新，进行提示
+					let str = '有新版本' + update.version + '可用，是否下载？';
 
-						// 获取到更新，进行提示
-						let str = '有新版本' + update.version + '可用，是否下载？';
-
-						// 处于后台时，发送通知
-						if (game.shijianHasLocalNotification()) {
-							if (document.hidden) {
-								let str2 = update.changeLog[0];
-								for (let i = 1; i < update.changeLog.length; i++) {
-									if (update.changeLog[i].indexOf('://') == -1) {
-										str2 += '；' + update.changeLog[i];
-									}
-								}
-								cordova.plugins.notification.local.schedule({
-									id: 1,
-									title: '更新提醒',
-									text: str + '\n' + str2,
-								});
-							}
-						}
-
-						if (navigator.notification && navigator.notification.confirm) {
+					// 处于后台时，发送通知
+					if (game.shijianHasLocalNotification()) {
+						if (document.hidden) {
 							let str2 = update.changeLog[0];
 							for (let i = 1; i < update.changeLog.length; i++) {
 								if (update.changeLog[i].indexOf('://') == -1) {
 									str2 += '；' + update.changeLog[i];
 								}
 							}
-							navigator.notification.confirm(str2, index => {
-								if (index == 1) goupdate();
-							},
-								str,
-								['确定', '取消']
-							);
-						} else {
-							if (confirm(str)) {
-								goupdate();
+							cordova.plugins.notification.local.schedule({
+								id: 1,
+								title: '更新提醒',
+								text: str + '\n' + str2,
+							});
+						}
+					}
+
+					if (navigator.notification && navigator.notification.confirm) {
+						let str2 = update.changeLog[0];
+						for (let i = 1; i < update.changeLog.length; i++) {
+							if (update.changeLog[i].indexOf('://') == -1) {
+								str2 += '；' + update.changeLog[i];
 							}
 						}
+						navigator.notification.confirm(str2, index => {
+							if (index == 1) goupdate();
+						},
+							str,
+							['确定', '取消']
+						);
+					} else {
+						if (confirm(str)) {
+							goupdate();
+						}
+					}
 
-					}).catch(console.error);
-				}
-				setInterval(checkUpdate, 1000 * 60 * 10);
-				setTimeout(checkUpdate, 2500);
+				}).catch(console.error);
 			}
+			setInterval(() => {
+				if (game.getExtensionConfig('在线更新', 'auto_check_update')) checkUpdate();
+			}, 1000 * 60 * 10);
+			// 刚开启时候的网络请求不会成功
+			if (game.getExtensionConfig('在线更新', 'auto_check_update')) setTimeout(checkUpdate, 2500);
 		},
 		precontent: function () {
 			// 添加两个更新地址
@@ -905,11 +906,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										}
 									}
 								} catch (e) {
-									if (e && e.message && e.message.indexOf('in JSON at position') != -1) {
-										try { eval(text) } catch (error) { }
-										if (typeof window.noname_update != 'object') {
-											return Promise.reject('更新内容获取失败(game/update.js)，请重试');
-										}
+									try { eval(text) } catch (error) { console.log(error) }
+									if (typeof window.noname_update != 'object') {
+										return Promise.reject('更新内容获取失败(game/update.js)，请重试');
 									}
 								}
 								return window.noname_update;
@@ -939,11 +938,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										}
 									}
 								} catch (e) {
-									if (e && e.message && e.message.indexOf('in JSON at position') != -1) {
-										try { eval(text) } catch (error) { }
-										if (typeof window.noname_source_list != 'object') {
-											return Promise.reject('更新内容获取失败(game/source.js)，请重试');
-										}
+									try { eval(text) } catch (error) { console.log(error) }
+									if (typeof window.noname_source_list != 'object') {
+										return Promise.reject('更新内容获取失败(game/source.js)，请重试');
 									}
 								}
 								return window.noname_source_list;
@@ -995,6 +992,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				});
 			};
 
+			// 获取更新素材
 			game.shijianGetUpdateAssets = () => {
 				/** 获取noname_asset_list */
 				function getNonameAssets() {
@@ -1019,11 +1017,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										}
 									}
 								} catch (e) {
-									if (e && e.message && e.message.indexOf('in JSON at position') != -1) {
-										try { eval(text) } catch (error) { }
-										if (typeof window.noname_asset_list != 'object') {
-											return Promise.reject('更新内容获取失败(game/asset.js)，请重试');
-										}
+									try { eval(text) } catch (error) { console.log(error) }
+									if (typeof window.noname_asset_list != 'object') {
+										return Promise.reject('更新内容获取失败(game/asset.js)，请重试');
 									}
 								}
 								return window.noname_asset_list;
@@ -1144,6 +1140,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				},
 				onclick: function (item) {
 					if (item != game.getExtensionConfig('在线更新', 'update_link')) {
+						if (['coding', 'xuanwu'].includes(item)) {
+							alert('此更新源已弃用，请不要再使用此更新源');
+							return false;
+						}
 						delete window.noname_update;
 						if (lib.updateURLS[item]) {
 							game.saveConfig('update_link', item);
@@ -1217,7 +1217,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				name: '每10分钟自动检测更新',
 				onclick: function (bool) {
 					game.saveExtensionConfig('在线更新', 'auto_check_update', bool);
-					game.saveConfig('auto_check_update', bool);
+					game.saveConfig('auto_check_update', false);
 				}
 			},
 			checkForUpdate: {
