@@ -1879,7 +1879,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				点击按钮即可在线更新，文件下载失败会自动重新下载。目前已经覆盖了游戏自带的更新按钮</br>
 				<span style='color:red'>※请不要在更新时关闭游戏或主动断网，否则后果自负</span></br>
 			`,
-			author: "诗笺",
+			author: "诗笺(Show-K修改)",
 			diskURL: "",
 			forumURL: "",
 			version: "1.45SST",
