@@ -1044,6 +1044,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									resolve({
 										// @ts-ignore
 										assets: window.noname_asset_list,
+										// @ts-ignore
+										skins: window.noname_skin_list
 									});
 								});
 							} catch (e) {
@@ -1058,6 +1060,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							resolve({
 								// @ts-ignore
 								assets: window.noname_asset_list,
+								// @ts-ignore
+								skins: window.noname_skin_list
 							});
 						} else {
 							reject('遇到其他错误, 请重试');
@@ -1579,7 +1583,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					} else {
 						button.innerHTML = '正在检查更新';
 						button.disabled = true;
-						game.shijianGetUpdateAssets().then(({ assets: updates }) => {
+						game.shijianGetUpdateAssets().then(({ assets: updates, skins }) => {
 							delete window.noname_asset_list;
 							let asset_version = updates.shift();
 							let skipcharacter = []
@@ -1640,16 +1644,14 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								}
 							}
 
-							/*
-							if (game.getExtensionConfig('在线更新', 'assetSkin')) {
-								//如果更新皮肤
+							// 如果更新皮肤
+							if (game.getExtensionConfig('在线更新', 'assetSkin') && typeof skins == 'object') {
 								for (let i in skins) {
 									for (let j = 1; j <= skins[i]; j++) {
-										updates.push('image/skin/' + i + '/' + j + '.jpg');
+										updates.push('image/skin/' + i + '/' + j + '.png');
 									}
 								}
 							}
-							*/
 
 							let proceed = () => {
 								if (updates.length == 0) {
@@ -1843,14 +1845,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				name: '检查音频素材',
 				onclick: assetConfigFun('assetAudio')
 			},
-			/*
 			assetSkin: {
 				init: false,
 				intro: '检查更新时，检查皮肤文件',
 				name: '检查皮肤素材',
 				onclick: assetConfigFun('assetSkin')
 			},
-			*/
 			assetImage: {
 				init: true,
 				intro: '检查更新时，检查图片文件(部分)',
