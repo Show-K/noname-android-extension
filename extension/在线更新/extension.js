@@ -4,7 +4,7 @@
 game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 	if (!game.getExtensionConfig('在线更新', 'incompatibleExtension') && (game.getExtensionConfig('概念武将', 'enable') || game.getExtensionConfig('假装无敌', 'enable'))) {
-		alert('【在线更新】扩展提示您：\r\n安装【概念武将】和【假装无敌】扩展后，出现任何问题后果自负');
+		alert('【在线更新】扩展提示您：\r\n安装【概念武将】和【假装无敌】扩展后，本扩展出现任何问题后果自负');
 		game.saveExtensionConfig('在线更新', 'incompatibleExtension', true);
 	}
 
@@ -242,57 +242,59 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				game.saveExtensionConfig('在线更新', 'brokenFile', [...new Set(brokenFileArr)]);
 			};
 			window.addEventListener('beforeunload', window.saveBrokenFile);
-
 			if (brokenFileArr && brokenFileArr.length) {
-				if (confirm(`检测到有未下载成功的文件(${brokenFileArr})，是否进行重新下载?`)) {
-					console.log('未下载成功的文件：', brokenFileArr);
-					// 复制文件数组，用来和进度绑定
-					const copyList = [...brokenFileArr];
-					// 当前下载进度
-					let index = 0;
-					// 创建下载进度div
-					const progress = game.shijianCreateProgress('重新下载', copyList.length, copyList[0], index);
-					document.body.appendChild(progress);
+				// 改为用setTimeout，因为刚开启时候的网络请求不会成功
+				setTimeout(() => {
+					if (confirm(`检测到有未下载成功的文件(${brokenFileArr})，是否进行重新下载?`)) {
+						console.log('未下载成功的文件：', brokenFileArr);
+						// 复制文件数组，用来和进度绑定
+						const copyList = [...brokenFileArr];
+						// 当前下载进度
+						let index = 0;
+						// 创建下载进度div
+						const progress = game.shijianCreateProgress('重新下载', copyList.length, copyList[0], index);
+						document.body.appendChild(progress);
 
-					game.shijianMultiDownload(brokenFileArr, () => {
-						// 下载成功，更新进度
-						progress.setProgressValue(++index);
-						progress.setFileName(copyList[index]);
-					}, (err, message) => {
-						// 下载失败
-						if (message == '用户未登录') {
-							// 移除进度条
-							progress.remove();
-							// 延时提示
+						game.shijianMultiDownload(brokenFileArr, () => {
+							// 下载成功，更新进度
+							progress.setProgressValue(++index);
+							progress.setFileName(copyList[index]);
+						}, (err, message) => {
+							// 下载失败
+							if (message == '用户未登录') {
+								// 移除进度条
+								progress.remove();
+								// 延时提示
+								setTimeout(() => {
+									alert('错误: 用户未登录(用coding和玄武镜像可能会出现此问题)\n请更换成其他更新源');
+								}, 100);
+							}
+						}, () => {
+							// 下载完成 不执行onsuccess而是onfinish
+							progress.setProgressValue(copyList.length);
+							progress.setFileName('下载完成');
 							setTimeout(() => {
-								alert('错误: 用户未登录(用coding和玄武镜像可能会出现此问题)\n请更换成其他更新源');
-							}, 100);
-						}
-					}, () => {
-						// 下载完成 不执行onsuccess而是onfinish
-						progress.setProgressValue(copyList.length);
-						progress.setFileName('下载完成');
-						setTimeout(() => {
-							// 移除进度条
-							progress.remove();
-							// 延时提示
-							setTimeout(() => {
-								alert('下载完成，将自动重启');
-								game.reload();
-							}, 100);
-						}, 200);
-					}, (current, loaded, total) => {
-						if (total != 0) {
-							progress.setFileName(`${current}(已完成${Math.round((loaded / total) * 100)}%)`);
-						} else {
-							progress.setFileName(`${current}(已下载${parseSize(loaded)})`);
-						}
-					});
-				} else {
-					console.log('不进行重新下载，已清空失败列表');
-					lib.config.extension_在线更新_brokenFile = [];
-					game.saveConfigValue('extension_在线更新_brokenFile');
-				}
+								// 移除进度条
+								progress.remove();
+								// 延时提示
+								setTimeout(() => {
+									alert('下载完成，将自动重启');
+									game.reload();
+								}, 100);
+							}, 200);
+						}, (current, loaded, total) => {
+							if (total != 0) {
+								progress.setFileName(`${current}(已完成${Math.round((loaded / total) * 100)}%)`);
+							} else {
+								progress.setFileName(`${current}(已下载${parseSize(loaded)})`);
+							}
+						});
+					} else {
+						console.log('不进行重新下载，已清空失败列表');
+						lib.config.extension_在线更新_brokenFile = [];
+						game.saveConfigValue('extension_在线更新_brokenFile');
+					}
+				}, window.inSplash ? 0 : 2500);
 			}
 
 			// 切换回应用，清除app通知
@@ -313,6 +315,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			if (game.getExtensionConfig('在线更新', 'auto_check_update')) {
 				function checkUpdate() {
 					game.shijianGetUpdateFiles().then(({ update }) => {
+						console.log('获取到更新', update);
 						if (update.version == lib.version) {
 							return;
 						} else {
@@ -389,7 +392,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					}).catch(console.error);
 				}
 				setInterval(checkUpdate, 1000 * 60 * 10);
-				setTimeout(checkUpdate, 1000);
+				setTimeout(checkUpdate, 2500);
 			}
 		},
 		precontent: function () {
@@ -705,34 +708,40 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 					fetch.then(response => response.arrayBuffer())
 						.then(arrayBuffer => {
-							// console.log(arrayBuffer);
-							// 写入文件
-							// 先创建指定文件夹
-							game.ensureDirectory(path, () => {
-								const fs = require('fs');
-								const p = require('path');
-								const filePath = p.join(__dirname, path, name);
-								// 如果是个文件夹，就退出
-								if (fs.existsSync(filePath)) {
-									const stat = fs.statSync(filePath);
-									if (stat.isDirectory()) {
-										console.error(`${path + '/' + name}是个文件夹`);
-										alert(`${path + '/' + name}是个文件夹，不予下载。请将此问题报告给此更新源的管理者。`);
-										lib.config.extension_在线更新_brokenFile.remove(path + '/' + name);
-										game.saveConfigValue('extension_在线更新_brokenFile');
-										// return error(new Error(path + '/' + name), 'isDirectory');
-										return success(undefined, true);
-									}
-								}
+							const fs = require('fs');
+							const p = require('path');
+							const filePath = p.join(__dirname, path, name);
+							const dirPath = p.dirname(filePath);
+							function writeFile() {
 								fs.writeFile(filePath, Buffer.from(arrayBuffer), null, e => {
 									if (e) error(e, 'writeFile');
 									else success();
 								});
-							});
+							}
+							if (!fs.existsSync(dirPath)) {
+								fs.mkdir(dirPath, { recursive: true }, e => {
+									if (e) error(e, '文件夹创建失败');
+									writeFile();
+								});
+							} else if (fs.existsSync(filePath)) {
+								const stat = fs.statSync(filePath);
+								if (stat.isDirectory()) {
+									console.error(`${path + '/' + name}是个文件夹`);
+									alert(`${path + '/' + name}是个文件夹，不予下载。请将此问题报告给此更新源的管理者。`);
+									lib.config.extension_在线更新_brokenFile.remove(path + '/' + name);
+									game.saveConfigValue('extension_在线更新_brokenFile');
+									return success(undefined, true);
+								} else {
+									writeFile();
+								}
+							} else {
+								writeFile();
+							}
 						})
 						.catch(
 							/** @param { Response } response */
 							response => {
+								console.log(response);
 								error(new Error(String(response.status)), response.statusText);
 							})
 				}
@@ -956,22 +965,31 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						let i = 0;
 						while (!(window.noname_update && window.noname_source_list) && i < 5) {
 							try {
-								await getNonameUpdate().then(() => getSourceList());
+								await getNonameUpdate().then(() => getSourceList()).then(() => {
+									resolve({
+										// @ts-ignore
+										update: window.noname_update,
+										// @ts-ignore
+										source_list: window.noname_source_list
+									});
+								});
 							} catch (e) {
 								console.log(e);
 								i++;
 								if (e == 'user_not_login') return reject(e);
 							}
 						}
-						if (i == 5) {
+						if (i == 5 && !(window.noname_update && window.noname_source_list)) {
 							reject('达到最大重试次数(5次), 请重试');
-						} else {
+						} else if (window.noname_update && window.noname_source_list) {
 							resolve({
 								// @ts-ignore
 								update: window.noname_update,
 								// @ts-ignore
 								source_list: window.noname_source_list
 							});
+						} else {
+							reject('遇到其他错误, 请重试');
 						}
 					}
 				});
@@ -1026,20 +1044,27 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						let i = 0;
 						while (typeof window.noname_asset_list != 'object' && i < 5) {
 							try {
-								await getNonameAssets();
+								await getNonameAssets().then(() => {
+									resolve({
+										// @ts-ignore
+										assets: window.noname_asset_list,
+									});
+								});
 							} catch (e) {
 								console.log(e);
 								i++;
 								if (e == 'user_not_login') return reject(e);
 							}
 						}
-						if (i == 5) {
+						if (i == 5 && !window.noname_asset_list) {
 							reject('达到最大重试次数(5次), 请重试');
-						} else {
+						} else if (window.noname_asset_list) {
 							resolve({
 								// @ts-ignore
 								assets: window.noname_asset_list,
 							});
+						} else {
+							reject('遇到其他错误, 请重试');
 						}
 					}
 				});
@@ -1068,7 +1093,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			show_version: {
 				clear: true,
 				nopointer: true,
-				name: '扩展版本： v1.44SST',
+				name: '扩展版本： v1.45SST',
 			},
 			update_link_explain: {
 				clear: true,
@@ -1861,7 +1886,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.44SST",
+			version: "1.45SST",
 		},
 		files: { "character": [], "card": [], "skill": [] }
 	}
