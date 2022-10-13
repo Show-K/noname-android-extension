@@ -1,6 +1,6 @@
 window['noname_android_extension'] = {
 	"在线更新": {
-		"version": "1.44SST",
+		"version": "1.45SST",
 		"author": "诗笺(Show-K修改)",
 		"intro": "用于更新无名杀版本，<span style=\"color: red;\">基本实现0崩溃</span>。",
 		"files": [
@@ -8,7 +8,7 @@ window['noname_android_extension'] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "66.42KB"
+		"size": "69.75KB"
 	},
 	"SJ Settings": {
 		"version": "1.292SST",
@@ -41,8 +41,8 @@ window['noname_android_extension'] = {
 		"size": "232.86KB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.9.115.2",
-		"version": "1.2.0.220114.12SST",
+		"nonameVersion": "1.9.115.3",
+		"version": "1.2.0.220114.13SST",
 		"author": "短歌(寰宇星城, Show-K代更)",
 		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
 		"files": [
@@ -428,6 +428,6 @@ window['noname_android_extension'] = {
 			"extension/十周年UI/image/decoration/name_unknown.png",
 			"extension/十周年UI/image/decoration/vs.png"
 		],
-		"size": "15.68MB"
+		"size": "15.67MB"
 	}
 };
