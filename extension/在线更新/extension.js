@@ -1144,10 +1144,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				},
 				onclick: function (item) {
 					if (item != game.getExtensionConfig('在线更新', 'update_link')) {
-						if (['coding', 'xuanwu'].includes(item)) {
-							alert('此更新源已弃用，请不要再使用此更新源');
-							return false;
-						}
 						delete window.noname_update;
 						if (lib.updateURLS[item]) {
 							game.saveConfig('update_link', item);
