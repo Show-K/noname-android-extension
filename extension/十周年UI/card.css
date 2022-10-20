@@ -44,7 +44,7 @@
     line-height: 150px;
 	color: black;
 	font-size: 100px;
-    font-family: fzhtk;
+    font-family: 'xingkai';
 	font-display: swap;
     text-align: center;
     text-shadow: 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white;
@@ -96,7 +96,7 @@
     text-align: center;
 	/* background-color: rgba(0, 0, 0, 0.4); */
 	background: linear-gradient(to right, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 20%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0.1) 100%);
-    color: rgb(255, 255, 255);
+    color: rgb(255, 255, 200);
     font-size: 17px;
 	width: 100%;
 	height: 33%;
@@ -104,7 +104,7 @@
 	align-items: center;
 	align-content: center;
 	justify-content: center;
-	font-family: fzhtk !important;
+	font-family: 'STHeiti', 'SimHei', 'Microsoft JhengHei', 'Microsoft YaHei', 'WenQuanYi Micro Hei', Helvetica,Arial, sans-serif !important;
 	z-index: 4;
 }
 
@@ -116,14 +116,14 @@
 .card>.gaintag.info,
 .card.button>.gaintag.info {
     left: 4px;
-    top: calc(50% - 38px);
+    top: calc(50% + 38px);
 	bottom: auto;
     right: 4px;
     width: auto;
     color: #181818;
     font-size: 20px;
     font-weight: bold;
-    font-family: fzhtk;
+    font-family: shousha;
     line-height: 24px;
     text-align: center;
     text-shadow: none;
@@ -152,15 +152,11 @@
 	color: black;
 	font-size: 16px;
 	font-weight: bold;
-	font-family: fzhtk;
+	font-family: shousha;
 	text-shadow: 0 0 1px white, 0 0 3px white;
 	border: 1px solid black;
 	border-radius: 2px;
 	z-index: 1;
-}
-
-.card.decade-card:not(*[data-card-type='basic'])>.name {
-    bottom: 20px;
 }
 
 #window[data-card-alternate-name-visible='off'] .card>.name,
@@ -180,7 +176,7 @@
     color: #181818;
     font-size: 20px;
     font-weight: bold;
-    font-family: fzhtk;
+    font-family: shousha;
     line-height: 24px;
     text-align: center;
     text-shadow: none;
