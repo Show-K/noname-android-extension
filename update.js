@@ -8,10 +8,10 @@ window['noname_android_extension'] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "69.75KB"
+		"size": "69.15KB"
 	},
 	"SJ Settings": {
-		"version": "1.292SST",
+		"version": "1.3SST",
 		"author": "诗笺(Show-K修改)",
 		"intro": "诗笺版（安卓）无名杀自带的SJ Settings扩展是用于导入“从其他应用使用无名杀打开的扩展包”，请勿删除<span style=\"color: red;\">注：从1.26版本起，扩展版本最好和app版本对应</span>",
 		"files": [
