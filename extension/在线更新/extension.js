@@ -399,7 +399,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			if (game.getExtensionConfig('在线更新', 'auto_check_update')) setTimeout(checkUpdate, 2500);
 		},
 		precontent: function () {
-			// 添加两个更新地址
+			// 添加一个更新地址
 			Object.assign(lib.updateURLS, {
 				ghproxy: 'https://ghproxy.com/https://raw.githubusercontent.com/Show-K/noname/super-smash-tabletop',
 			});
@@ -413,7 +413,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				game.saveConfig('update_link', game.getExtensionConfig('在线更新', 'update_link'));
 			}
 
-			// 修改游戏原生更新选项，插入上面的3个更新地址
+			// 修改游戏原生更新选项，插入上面的1个更新地址
 			if (lib.configMenu.general.config.update_link) {
 				lib.configMenu.general.config.update_link = {
 					unfrequent: true,
