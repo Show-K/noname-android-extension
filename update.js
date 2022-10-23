@@ -41,7 +41,7 @@ window["noname_android_extension"] = {
 		"size": "232.86KB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.9.116",
+		"nonameVersion": "1.9.116.1",
 		"version": "1.2.0.220114.14SST",
 		"author": "短歌(寰宇星城, Show-K代更)",
 		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
