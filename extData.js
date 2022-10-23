@@ -1,7 +1,7 @@
 module.exports = {
 	extension: {
 		'在线更新': {
-			version: '1.45SST',
+			version: '1.46SST',
 			author: '诗笺(Show-K修改)',
 			intro: '用于更新无名杀版本，<span style="color: red;">基本实现0崩溃</span>。'
 		},

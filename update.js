@@ -1,6 +1,6 @@
-window['noname_android_extension'] = {
+window["noname_android_extension"] = {
 	"在线更新": {
-		"version": "1.45SST",
+		"version": "1.46SST",
 		"author": "诗笺(Show-K修改)",
 		"intro": "用于更新无名杀版本，<span style=\"color: red;\">基本实现0崩溃</span>。",
 		"files": [
@@ -8,7 +8,7 @@ window['noname_android_extension'] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "69.15KB"
+		"size": "69.89KB"
 	},
 	"SJ Settings": {
 		"version": "1.3SST",
