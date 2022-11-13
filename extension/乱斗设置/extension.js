@@ -8,7 +8,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		exts = JSON.parse(localStorage.getItem('noname_android_extension'));
 		localStorage.removeItem('noname_android_extension');
 	} else {
-		exts = ['SJ Settings'];
+		exts = ['乱斗设置'];
 	}
 	for (const extensionName of exts) {
 		if (!lib.config.extensions.contains(extensionName)) {
@@ -26,12 +26,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 	}
 
 	return {
-		name: "SJ Settings",
+		name: "乱斗设置",
 		editable: false,
 		content: function (config, pack) {
-			delete lib.extensionMenu['extension_SJ Settings'].delete;
+			delete lib.extensionMenu['extension_乱斗设置'].delete;
 
-			let layoutPath = lib.assetURL + 'extension/SJ Settings';
+			let layoutPath = lib.assetURL + 'extension/乱斗设置';
 			lib.init.css(layoutPath, 'extension');
 
 			/** 修改游戏导入设置 */
@@ -105,10 +105,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						game.putDB('data', i, data.data[i]);
 					}
 					// 现有扩展的合并
-					if (confirm('导入配置是否额外保存现有扩展？\n否则只保留SJ Settings扩展')) {
+					if (confirm('导入配置是否额外保存现有扩展？\n否则只保留乱斗设置扩展')) {
 						lib.config.extensions = [...new Set([...lib.config.extensions, ...extensions])];
 					} else {
-						lib.config.extensions = [...new Set([...lib.config.extensions, 'SJ Settings'])];
+						lib.config.extensions = [...new Set([...lib.config.extensions, '乱斗设置'])];
 					}
 					game.saveConfigValue('extensions');
 				}
@@ -313,7 +313,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				});
 			}, false);
 
-			if (!window.noname_shijianInterfaces.environment && !_status.openTools && game.getExtensionConfig('SJ Settings', 'openTools')) {
+			if (!window.noname_shijianInterfaces.environment && !_status.openTools && game.getExtensionConfig('乱斗设置', 'openTools')) {
 				_status.openTools = true;
 				eruda.init();
 			}
@@ -328,7 +328,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						_status.openTools = true;
 						eruda.init();
 					}
-					game.saveExtensionConfig('SJ Settings', 'openTools', item);
+					game.saveExtensionConfig('乱斗设置', 'openTools', item);
 				},
 			},
 			getExtensions: {
@@ -700,15 +700,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				onclick(item) {
 					const wsserver = cordova.plugins.wsserver;
 					/** @type number */
-					let port = parseInt(game.getExtensionConfig('SJ Settings', 'webSocketServer'));
+					let port = parseInt(game.getExtensionConfig('乱斗设置', 'webSocketServer'));
 					if (!wsserver) {
 						return alert('本app未安装WebSocketServer插件');
 					}
 					if (isNaN(port)) {
 						port = 8080;
-						game.saveExtensionConfig('SJ Settings', 'webSocketServer', port);
+						game.saveExtensionConfig('乱斗设置', 'webSocketServer', port);
 					}
-					game.saveExtensionConfig('SJ Settings', 'startWebSocketServer', item);
+					game.saveExtensionConfig('乱斗设置', 'startWebSocketServer', item);
 					localStorage.setItem('noname_shijianWebSocketOpen', item);
 					if (item) {
 						if (confirm('该设置需要重启才能生效(并且自动跳转到联机模式)，是否重启?')) {
@@ -738,7 +738,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						target.innerText = '8080';
 						value = 8080;
 					}
-					game.saveExtensionConfig('SJ Settings', 'webSocketServer', value);
+					game.saveExtensionConfig('乱斗设置', 'webSocketServer', value);
 					localStorage.setItem('noname_shijianWebSocketPort', value);
 
 					if (window.noname_shijianInterfaces.isRunning) {

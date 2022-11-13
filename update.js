@@ -2,7 +2,7 @@ window["noname_android_extension"] = {
 	"在线更新": {
 		"version": "1.46SST",
 		"author": "诗笺(Show-K修改)",
-		"intro": "用于更新无名杀版本，<span style=\"color: red;\">基本实现0崩溃</span>。",
+		"intro": "用于更新大乱桌斗版本，<span style=\"color: red;\">基本实现0崩溃</span>。",
 		"files": [
 			"extension/在线更新/extension.css",
 			"extension/在线更新/extension.js",
@@ -10,16 +10,16 @@ window["noname_android_extension"] = {
 		],
 		"size": "69.92KB"
 	},
-	"SJ Settings": {
+	"乱斗设置": {
 		"version": "1.3SST",
 		"author": "诗笺(Show-K修改)",
-		"intro": "诗笺版（安卓）无名杀自带的SJ Settings扩展是用于导入“从其他应用使用无名杀打开的扩展包”，请勿删除<span style=\"color: red;\">注：从1.26版本起，扩展版本最好和app版本对应</span>",
+		"intro": "大乱桌斗自带的乱斗设置扩展是用于导入“从其他应用使用大乱桌斗打开的扩展包”，请勿删除<span style=\"color: red;\">注：从1.26版本起，扩展版本最好和app版本对应</span>",
 		"files": [
-			"extension/SJ Settings/extension.css",
-			"extension/SJ Settings/extension.js",
-			"extension/SJ Settings/typings/index.d.ts"
+			"extension/乱斗设置/extension.css",
+			"extension/乱斗设置/extension.js",
+			"extension/乱斗设置/typings/index.d.ts"
 		],
-		"size": "28.42KB"
+		"size": "28.43KB"
 	},
 	"全能搜索": {
 		"version": "2.15SST",
@@ -44,7 +44,7 @@ window["noname_android_extension"] = {
 		"nonameVersion": "1.9.116.3",
 		"version": "1.2.0.220114.16SST",
 		"author": "短歌(寰宇星城, Show-K代更)",
-		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
+		"intro": "是最主流的美化扩展，也是许多特效，美化的基础",
 		"files": [
 			"extension/十周年UI/animation.css",
 			"extension/十周年UI/animation.js",
