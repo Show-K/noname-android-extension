@@ -8,7 +8,7 @@ window["noname_android_extension"] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "69.92KB"
+		"size": "70.21KB"
 	},
 	"乱斗设置": {
 		"version": "1.3SST",
@@ -299,6 +299,8 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/card/gz_wenheluanwu.webp",
 			"extension/十周年UI/image/card/hanbing.webp",
 			"extension/十周年UI/image/card/heiguangkai.webp",
+			"extension/十周年UI/image/card/hhzz_fudichouxin.webp",
+			"extension/十周年UI/image/card/hhzz_toulianghuanzhu.webp",
 			"extension/十周年UI/image/card/hongshui.webp",
 			"extension/十周年UI/image/card/hualiu.webp",
 			"extension/十周年UI/image/card/huogong.webp",
@@ -313,10 +315,12 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/card/jinhe.webp",
 			"extension/十周年UI/image/card/jintuiziru.webp",
 			"extension/十周年UI/image/card/jiu.webp",
+			"extension/十周年UI/image/card/jiuwei.webp",
 			"extension/十周年UI/image/card/jiwangkailai.webp",
 			"extension/十周年UI/image/card/juedou.webp",
 			"extension/十周年UI/image/card/jueying.webp",
 			"extension/十周年UI/image/card/kaihua.webp",
+			"extension/十周年UI/image/card/kuwu.webp",
 			"extension/十周年UI/image/card/lanyinjia.webp",
 			"extension/十周年UI/image/card/lebu.webp",
 			"extension/十周年UI/image/card/leisha.webp",
@@ -325,7 +329,9 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/card/lizhengshangyou.webp",
 			"extension/十周年UI/image/card/lulitongxin.webp",
 			"extension/十周年UI/image/card/luojingxiashi.webp",
+			"extension/十周年UI/image/card/mianju.webp",
 			"extension/十周年UI/image/card/minguangkai.webp",
+			"extension/十周年UI/image/card/monkey.webp",
 			"extension/十周年UI/image/card/muniu.webp",
 			"extension/十周年UI/image/card/nanman.webp",
 			"extension/十周年UI/image/card/numa.webp",
@@ -344,6 +350,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/card/shandian.webp",
 			"extension/十周年UI/image/card/shengdong.webp",
 			"extension/十周年UI/image/card/shezhanqunru.webp",
+			"extension/十周年UI/image/card/shoulijian.webp",
 			"extension/十周年UI/image/card/shuiyanqijun.webp",
 			"extension/十周年UI/image/card/shuiyanqijunx.webp",
 			"extension/十周年UI/image/card/shuiyanqijuny.webp",
@@ -382,6 +389,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/card/xietianzi.webp",
 			"extension/十周年UI/image/card/xinge.webp",
 			"extension/十周年UI/image/card/xionghuangjiu.webp",
+			"extension/十周年UI/image/card/xuelunyang.webp",
 			"extension/十周年UI/image/card/yajiaoqiang.webp",
 			"extension/十周年UI/image/card/yexingyi.webp",
 			"extension/十周年UI/image/card/yinfengjia.webp",
@@ -428,6 +436,6 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decoration/name_unknown.png",
 			"extension/十周年UI/image/decoration/vs.png"
 		],
-		"size": "15.60MB"
+		"size": "29.24MB"
 	}
 };
