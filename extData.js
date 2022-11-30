@@ -18,7 +18,7 @@ module.exports = {
 		'十周年UI': {
 			// 美化扩展应只适合当前的大乱桌斗版本
 			nonameVersion: '1.9.116.3',
-			version: '1.2.0.220114.16SST',
+			version: '1.2.0.220114.17SST',
 			author: '短歌(寰宇星城, Show-K代更)',
 			intro: '是最主流的美化扩展，也是许多特效，美化的基础'
 		}
