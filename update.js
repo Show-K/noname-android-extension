@@ -41,8 +41,8 @@ window["noname_android_extension"] = {
 		"size": "232.86KB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.9.117.2",
-		"version": "1.2.0.220114.18SST",
+		"nonameVersion": "1.9.118",
+		"version": "1.2.0.220114.19SST",
 		"author": "短歌(寰宇星城, Show-K代更)",
 		"intro": "是最主流的美化扩展，也是许多特效，美化的基础",
 		"files": [
