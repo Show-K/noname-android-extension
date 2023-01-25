@@ -427,7 +427,9 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decoration/identity_nei.png",
 			"extension/十周年UI/image/decoration/identity_nongmin.png",
 			"extension/十周年UI/image/decoration/identity_zhong.png",
+			"extension/十周年UI/image/decoration/identity_zhong_blue.png",
 			"extension/十周年UI/image/decoration/identity_zhu.png",
+			"extension/十周年UI/image/decoration/identity_zhu_blue.png",
 			"extension/十周年UI/image/decoration/name_sst_dark.png",
 			"extension/十周年UI/image/decoration/name_sst_light.png",
 			"extension/十周年UI/image/decoration/name_sst_reality.png",
@@ -436,6 +438,6 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decoration/name_unknown.png",
 			"extension/十周年UI/image/decoration/vs.png"
 		],
-		"size": "29.24MB"
+		"size": "29.32MB"
 	}
 };
